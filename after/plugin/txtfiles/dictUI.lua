@@ -50,6 +50,3 @@ function CreateFloatingWindow(wdObj)
 	})
 end
 
--- function testFloatingWin()
--- 	CreateFloatingWindow({word='climb',definition='to ascend'})
--- end
