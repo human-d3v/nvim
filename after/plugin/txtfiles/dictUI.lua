@@ -6,7 +6,16 @@ local function renderTitleSeparater(num)
 	return sep
 end
 
-function CreateFloatingWindow(wdObj)
+local function newLineRender(obj)
+	local definitions = obj.definition
+	local lines = {}
+	for _, def in ipairs(definitions) do
+		table.insert(lines, def)
+	end
+	return lines
+end
+
+function CreateFloatingWindow(wdObj,hdr)
 	--get current buffer
 	local bufnr = vim.api.nvim_create_buf(false,true)
 	local winWidth = vim.api.nvim_win_get_width(0)
@@ -39,11 +48,13 @@ function CreateFloatingWindow(wdObj)
 	vim.cmd("highlight FloatBorder guifg=white")
 	--create the floating window
 	local win = vim.api.nvim_open_win(bufnr, true, opts)
-	--creat separator
+	--create separator
 	local sep = renderTitleSeparater(floatWidth)
+	--create body contents
+	local body = newLineRender(wdObj)
 	--set buffer contents
-	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {wdObj.word, sep,
-	wdObj.definition})
+	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, {hdr, sep, wdObj.word, sep,
+	unpack(body)})
 	--set buffer keymap to close window with 'q'
 	vim.api.nvim_buf_set_keymap(bufnr, 'n', 'q','<cmd>bd!<CR>', {noremap=true,
 		silent=true
