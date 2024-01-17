@@ -97,8 +97,11 @@ local plugins = {
 			lazy = false,
 		},
 		--colorscheme
+		-- {
+		-- 	'GustavoPrietoP/doom-themes.nvim'
+		-- },
 		{
-			'GustavoPrietoP/doom-themes.nvim'
+		'aktersnurra/no-clown-fiesta.nvim',
 		},
 		--kitty conf files syntax highlighting
 		'fladson/vim-kitty',
