@@ -16,7 +16,7 @@ config = function ()
 			{open = "[", close = "]"},
 			{open = "{", close = "}"}
 		},
-		ignore_beginning = false,
+		ignore_beginning = true,
 		exlude = {}
 	}
 end

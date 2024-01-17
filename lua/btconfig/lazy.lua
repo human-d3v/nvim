@@ -81,12 +81,13 @@ local plugins = {
 		--for R programming
 			'jalvesaq/Nvim-R',
 			'gaalcaras/ncm-R',
-		--for web dev
-			--{'barrett-ruth/live-server.nvim', build = 'yarn global add live-server', config = true},
 		--for Rust
 			'neovim/nvim-lspconfig',
-			'simrat39/rust-tools.nvim',
-
+			{
+				'mrcjkb/rustaceanvim',
+				version = '^3', 
+				ft = {'rust'},
+			},
 			--rust debugging
 				'mfussenegger/nvim-dap',
 		--for quick commenting
