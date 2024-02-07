@@ -39,3 +39,11 @@ vim.g.mapleader = " "
 
 --filetype trigger
 vim.opt.filetype='on'
+
+--stata filetype handler
+vim.cmd [[
+	autocmd BufRead,BufNewFile *.do set filetype=do
+	autocmd BufRead,BufNewFile *.ado set filetype=ado
+	autocmd BufRead,BufNewFile *.dct set filetype=dct
+
+]]

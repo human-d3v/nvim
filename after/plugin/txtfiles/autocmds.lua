@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = {'txt','text'},
+    pattern = {'txt','text','markdown','md'},
     callback = function ()
         vim.schedule(function ()
             vim.api.nvim_buf_set_keymap(0, "v", "<leader>go", [[:lua OpenChromeWithURL()<CR>]], { noremap=true, silent=true })
