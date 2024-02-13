@@ -22,4 +22,3 @@ function GetDef()
 	CreateFloatingWindow(wdObj, 'Dictionary:')
 end
 
-
