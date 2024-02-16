@@ -1,5 +1,6 @@
 function OpenBufferTerminalInStata()
-	vim.api.nvim_exec('new | term', false)
+	-- vim.api.nvim_exec('new | term', false)
+	vim.api.nvim_exec('belowright split | term', false)
 	local bufnr = vim.api.nvim_get_current_buf()
   vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(bufnr, 'channel'), 'stata-mp' .. "\r")
 end
@@ -16,8 +17,8 @@ function SendToStata(opt)
 	elseif opt == 2 then
 		local ln, _  = unpack(vim.api.nvim_win_get_cursor(0))
 		local lnTxts = vim.api.nvim_buf_get_lines(vim.api.nvim_get_current_buf(), 0, ln, false)
-		-- txt = table.concat(lnTxts, "\n")
-		txt = lnTxts
+		txt = table.concat(lnTxts, "\n")
+		-- txt = lnTxts
 	else
 		txt = vim.api.nvim_get_current_line()
 	end
