@@ -5,11 +5,19 @@ function OpenBufferTerminalInStata()
 end
 
 
-function SendVisToStata(isVis)
+function SendToStata(opt)
+	--0: send the current line to Stata
+	--1: send the visual selection to Stata
+	--2: send the entire file up to and including the current line to Stata
 	local txt = ''
-	if isVis == true then
+	if opt == 1 then
 		vim.cmd('normal! gv"xy') --captures vis selection
 		txt = vim.fn.getreg('x')
+	elseif opt == 2 then
+		local ln, _  = unpack(vim.api.nvim_win_get_cursor(0))
+		local lnTxts = vim.api.nvim_buf_get_lines(vim.api.nvim_get_current_buf(), 0, ln, false)
+		-- txt = table.concat(lnTxts, "\n")
+		txt = lnTxts
 	else
 		txt = vim.api.nvim_get_current_line()
 	end
@@ -30,12 +38,13 @@ function SendVisToStata(isVis)
 end
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = {"do", "ado", "dct"},
+	pattern = {"stata"},
 	callback = function ()
 		vim.schedule(function ()
 			vim.keymap.set("n", "<leader>mp", [[:lua OpenBufferTerminalInStata()<CR>]], {noremap=true, buffer=true})
-			vim.keymap.set({"v","x"}, "<leader>t", [[:lua SendVisToStata(true)<CR>]], {noremap=true, buffer=true})
-			vim.keymap.set("n", "<leader>t", [[:lua SendVisToStata(false)<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set({"v","x"}, "<leader><leader>t", [[:lua SendToStata(1)<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set("n", "<leader><leader>t", [[:lua SendToStata(0)<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set("n", "<leader><leader>at", [[:lua SendToStata(2)<CR>]], {noremap=true, buffer=true})
 		end)
 	end,
 })
