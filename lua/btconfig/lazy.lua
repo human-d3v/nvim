@@ -13,9 +13,10 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 
 local plugins = {
-    {'nvim-telescope/telescope.nvim', tag = '0.1.2',--nvim telescope. works as a fuzzy finder 
+    {'nvim-telescope/telescope.nvim', tag = '0.1.5',--nvim telescope. works as a fuzzy finder 
       dependencies = { 'nvim-lua/plenary.nvim' }
     },
+		{"folke/trouble.nvim", dependencies={"nvim-tree/nvim-web-devicons"},opts = {}},
 		'NLKNguyen/papercolor-theme',
 		{'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
 		('nvim-treesitter/playground'),
