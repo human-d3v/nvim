@@ -54,3 +54,4 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", {silent = true})
 
 --for terminal navigation (the noremap opt is important, otherwise it fails)
 vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<leader><leader>term", ':belowright split | terminal<CR>', {noremap = true, silent=true})
