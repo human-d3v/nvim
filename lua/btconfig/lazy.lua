@@ -68,7 +68,7 @@ local plugins = {
 					{open = '[', close = ']'},
 					{open = '{', close = '}'}
 				},
-				ignore_beginning = false, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+				ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
 				exclude = {} -- tabout will ignore these filetypes
 			}
 			end,
@@ -109,6 +109,17 @@ local plugins = {
 		},
 		--Stata syntax highlighting
 		'poliquin/stata-vim',
+		{
+			"Exafunction/codeium.nvim",
+			dependencies = {
+    	    "nvim-lua/plenary.nvim",
+    	    "hrsh7th/nvim-cmp",
+    	},
+    	config = function()
+    	    require("codeium").setup({
+    	    })
+    	end
+		},
 }
 
 
