@@ -1,12 +1,12 @@
-function OpenBufferTerminalInStata()
+function OpenBufferTerminalRepl(opt)
 	-- vim.api.nvim_exec('new | term', false)
 	vim.api.nvim_exec('belowright split | term', false)
 	local bufnr = vim.api.nvim_get_current_buf()
-  vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(bufnr, 'channel'), 'stata-mp' .. "\r")
+  vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(bufnr, 'channel'), opt .. "\r")
 end
 
 
-function SendToStata(opt)
+function SendToRepl(opt)
 	--0: send the current line to Stata
 	--1: send the visual selection to Stata
 	--2: send the entire file up to and including the current line to Stata
@@ -42,10 +42,10 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = {"stata"},
 	callback = function ()
 		vim.schedule(function ()
-			vim.keymap.set("n", "<leader>mp", [[:lua OpenBufferTerminalInStata()<CR>]], {noremap=true, buffer=true})
-			vim.keymap.set({"v","x"}, "<leader><leader>t", [[:lua SendToStata(1)<CR>]], {noremap=true, buffer=true})
-			vim.keymap.set("n", "<leader><leader>t", [[:lua SendToStata(0)<CR>]], {noremap=true, buffer=true})
-			vim.keymap.set("n", "<leader><leader>at", [[:lua SendToStata(2)<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set("n", "<leader>mp", [[:lua OpenBufferTerminalRepl('stata-mp')<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set({"v","x"}, "<leader><leader>t", [[:lua SendToRepl(1)<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set("n", "<leader><leader>t", [[:lua SendToRepl(0)<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set("n", "<leader><leader>at", [[:lua SendToRepl(2)<CR>]], {noremap=true, buffer=true})
 		end)
 	end,
 })

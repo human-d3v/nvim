@@ -20,6 +20,23 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
+--adding codeium setup with cmp
+cmp.setup({
+	snippet = {
+		expand = function (args)
+			require('luasnip').lsp_expand(args.body)
+		end
+	},
+	window = {
+		
+	},
+	mapping = cmp_mappings,
+	sources = cmp.config.sources({
+		{name = "codeium"},
+		{name = 'luasnip'}
+	})
+})
+
 lsp.setup_nvim_cmp({
 	mapping = cmp_mappings
 })

@@ -37,3 +37,10 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- setting chatgpt useage based on filetype
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"lua", "python", "python3","typescript","javascript","sh"},
+	callback = function ()
+    vim.keymap.set("n", "<leader>g", ":ChatGPT<CR>",{buffer = true})
+  end,
+})
