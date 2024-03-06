@@ -23,6 +23,19 @@ function SendToRepl(opt)
 		txt = vim.api.nvim_get_current_line()
 	end
 
+	--move cursor to next non-empty line
+	-- local empty_line_pattern = '^%s*$'
+	local empty_or_comment_line = "'^\\s*\\*|^\\s*$'"
+	local cur_line = vim.api.nvim_get_current_line()
+	vim.cmd('normal! j') --move down one line before check
+	while true do
+		if empty_or_comment_line:match(cur_line) then
+			vim.cmd('normal! j')
+		else
+			break
+		end
+	end
+
 	local term_buf = nil
 	for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
 		if vim.bo[bufnr].buftype == 'terminal' then
