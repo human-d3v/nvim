@@ -1,3 +1,31 @@
+local okay_status, NeoSolarized = pcall(require, "NeoSolarized")
+if not okay_status then
+  return
+end
+
+NeoSolarized.setup({
+	style="dark",
+	transparent=true,
+	terminal_colors=true,
+	enable_italics=true,
+	syles = {
+		comment = { italic = true },
+		keyword = { italic = true },
+		functions = { bold = true },
+		variables = {},
+		string = {italic = true},
+		underline=true,
+		undercurl=true,
+	},
+	on_highlights = function (highlights, colors)
+		-- if you leave the visual defaults, visual highlights are invisible
+		highlights.Visual = {
+			bg = '#eee8d5',
+			fg = '#839496'
+		}
+	end,
+})
+
 function bgOpacity(color)
 	-- color = color or "PaperColor"
 	color = color or "NeoSolarized"
@@ -7,17 +35,6 @@ function bgOpacity(color)
 	vim.api.nvim_set_hl(0, "NormalFloat", {bg = "none"})
 end
 
--- require("no-clown-fiesta").setup({
---   transparent = true, -- Enable this to disable the bg color
---   styles = {
---     -- You can set any of the style values specified for `:h nvim_set_hl`
---     comments = {},
---     keywords = {},
---     functions = {},
---     variables = {},
---     type = { bold = true },
---     lsp = { underline = true }
---   },
--- })
+
 
 bgOpacity()
