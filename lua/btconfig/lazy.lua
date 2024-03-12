@@ -17,7 +17,12 @@ local plugins = {
       dependencies = { 'nvim-lua/plenary.nvim' }
     },
 		{"folke/trouble.nvim", dependencies={"nvim-tree/nvim-web-devicons"},opts = {}},
-		'NLKNguyen/papercolor-theme',
+		-- 'NLKNguyen/papercolor-theme',
+		{"Tsuzat/NeoSolarized.nvim",
+			lazy = false,
+			priority = 1000,
+			config = {}
+		},
 		{'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
 		('nvim-treesitter/playground'),
 		('nvim-lua/plenary.nvim'),

@@ -1,7 +1,6 @@
 function bgOpacity(color)
-	color = color or "PaperColor"
-	-- -- color = color or 'doom-molokai' 
-	-- color = "no-clown-fiesta"
+	-- color = color or "PaperColor"
+	color = color or "NeoSolarized"
 	vim.cmd.colorscheme(color)
 	vim.opt.background = "dark"
 	vim.api.nvim_set_hl(0, "Normal", {bg = "none"})
