@@ -1,5 +1,5 @@
 local function makeSynCall(wd)
-	local cmd = 'python3 ~/.config/nvim/after/plugin/txtfiles/synonym.py ' .. wd
+	local cmd = 'source ~/.config/nvim/after/plugin/txtfiles/syn/bin/activate && python3 ~/.config/nvim/after/plugin/txtfiles/syn/synonym.py ' .. wd
 	local handle = io.popen(cmd)
 	local result = handle:read("*a")
 	handle:close()
