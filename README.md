@@ -39,19 +39,19 @@ rm -Rf ./tmp &
 ```{bash}
 # for MacOS:
 ## install brew if you haven't already
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &
 ## install python3 using brew
-brew install python3.12
+brew install python3.12 &
 ## install venv
-brew install python3-venv
+brew install python3-venv &
 ## create venv in txtfiles
-cd ~/.config/nvim/after/plugin/txtfiles/
-mv ./syn ./tmp
-python3 -m venv syn
-source syn/bin/activate
-mv ./tmp/*.py ./syn
-pip install requests sys
-rm -Rf ./tmp
+cd ~/.config/nvim/after/plugin/txtfiles/ &
+mv ./syn ./tmp &
+python3 -m venv syn &
+source syn/bin/activate &
+mv ./tmp/*.py ./syn &
+pip install requests sys &
+rm -Rf ./tmp &
 ```
 
 _______
