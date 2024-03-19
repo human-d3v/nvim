@@ -23,7 +23,7 @@ rm -Rf ./tmp &
 ```
 ```{bash}
 # for arch linux:
-## isntall python3
+## install python3
 sudo pacman -S python3 python3-pip &
 # install venv
 python3 -m pip install venv &
