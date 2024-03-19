@@ -6,7 +6,7 @@ return wd
 end
 
 local function makeCall(wd)
-	local cmd = 'python3 ~/.config/nvim/after/plugin/txtfiles/dict-def.py ' .. wd
+	local cmd = 'source ~/.config/nvim/after/plugin/txtfiles/syn/bin/activate && python3 ~/.config/nvim/after/plugin/txtfiles/syn/dict-def.py ' .. wd
 	local handle = io.popen(cmd)
 	local result = handle:read("*a")
 	handle:close()
