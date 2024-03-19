@@ -6,7 +6,7 @@
     * pip
     * requests
     * venv 
-```{bash}
+```bash
 # for fedora linux:
 ## install python3
 sudo dnf install python3 python3-pip &
@@ -21,7 +21,7 @@ mv ./tmp/*.py ./syn &
 pip install requests sys &
 rm -Rf ./tmp &
 ```
-```{bash}
+```bash
 # for arch linux:
 ## install python3
 sudo pacman -S python3 python3-pip &
@@ -36,7 +36,7 @@ mv ./tmp/*.py ./syn/ &
 pip install requests sys &
 rm -Rf ./tmp &
 ```
-```{bash}
+```bash
 # for MacOS:
 ## install brew if you haven't already
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &
@@ -57,7 +57,7 @@ rm -Rf ./tmp &
 _______
 ## Language Specific configurations
 ### Python
-```{lua}
+```lua
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "python",
 	callback = function()
@@ -77,7 +77,7 @@ mapping.
 ______
 ### Rust
 For some quicker keymaps, I used the following commands:
-```{lua}
+```lua
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = {"rust", "rs", "Rust"},
 	callback = function ()
@@ -96,7 +96,7 @@ return operator, and `<leader>rr` to run the rust program.
 
 Then, to configure the rust lsp, I mapped the `<leader>ca` to the code action
 value.
-```{lua}
+```lua
 local bufnr = vim.api.nvim_get_current_buf()
 vim.keymap.set(
 	"n",
@@ -125,7 +125,7 @@ linters: linters_with_defaults(
 	object_name_linter = object_name_linter("camelCase"))
 ```
 From there, the keymaps are pretty simple:
-```{lua}
+```lua
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = {"r", "rnoweb","rmd"},
 	callback = function ()
@@ -145,7 +145,7 @@ This remaps the '>' operator to the ' %>% ' dplyr operator and 'in ' to the
 _____
 ### JavaScript and TypeScript
 I remapped the arrow function '=>' operator to the '>' sign:
-```{lua}
+```lua
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = {"js", "ts", "javascript", "typescript"},
 	callback = function ()
@@ -161,7 +161,7 @@ _____
 I built a [dependency-free lsp server from
 scratch](https://github.com/human-d3v/stata-nvim/) for Stata do files. To
 launch the server, I created the following function:
-```{lua}
+```lua
 local lspconfig = require("lspconfig")
 local configs = require("lspconfig.configs")
 
@@ -199,7 +199,7 @@ _____
 Codium AI is a helpful autocompletion plugin. It only requires an api key to
 use it. I created a [Codium API key](https://codium.com/api-key) and added it
 my config.
-```{lua}
+```lua
 {
     "Exafunction/codeium.nvim",
 	dependencies = {
@@ -219,12 +219,12 @@ password prompt will appear when I open a terminal buffer to decrypt the key,
 but this isn't much of a hindrance. 
 
 In my .zshrc, it looks like this:
-```{bash}
+```bash
 export OPENAI_API_KEY=$(gpg --decrypt ~/.lsp/chatgpt/credential.txt.gpg)
 ```
 This key is added to my path and accessible to ChatGPT. 
 Next, I rewrote the welcome prompt to include the keymaps:
-```{lua}
+```lua
 
 local instructions = [[
 	** Instructions **
