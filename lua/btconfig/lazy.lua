@@ -111,7 +111,11 @@ local plugins = {
 		      "folke/trouble.nvim",
 		      "nvim-telescope/telescope.nvim"
 		    }
-		}
+		},
+		--testing copilot access from work
+		-- {
+		-- 	"github/copilot.vim"
+		-- }
 }
 
 
