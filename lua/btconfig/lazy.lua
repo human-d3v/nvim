@@ -112,11 +112,6 @@ local plugins = {
 		      "nvim-telescope/telescope.nvim"
 		    }
 		},
-		--testing copilot access from work
-		-- {
-		-- 	"github/copilot.vim"
-		-- }
-		-- colors for css
 		{
 			"NvChad/nvim-colorizer.lua",
 			config = function()
