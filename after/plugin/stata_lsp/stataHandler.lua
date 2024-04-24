@@ -2,6 +2,7 @@ function OpenBufferTerminalRepl(opt)
 	-- vim.api.nvim_exec('new | term', false)
 	vim.api.nvim_exec('belowright split | term', false)
 	local bufnr = vim.api.nvim_get_current_buf()
+	vim.g.terminal_buffer = bufnr
   vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(bufnr, 'channel'), opt .. "\r")
 end
 
@@ -22,7 +23,7 @@ function SendToRepl(opt)
 	else
 		txt = vim.api.nvim_get_current_line()
 	end
-
+	
 	--move cursor to next non-empty line
 	-- local empty_line_pattern = '^%s*$'
 	local empty_or_comment_line = "'^\\s*\\*|^\\s*$'"
@@ -47,8 +48,13 @@ function SendToRepl(opt)
 		print("No terminal found.")
 		return
 	end
-
-	vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(term_buf, 'channel'), txt .. '\r')
+	if string.match(string.lower(txt), "%f[%a]use%f[%A]") then 
+		vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(term_buf, 'channel'), txt .. '\r')
+		vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(term_buf, 'channel'), "describe" .. '\r')
+		-- vim.api.nvim_command("lua StataGlobalEnv()")
+	else
+		vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(term_buf, 'channel'), txt .. '\r')
+	end
 end
 
 vim.api.nvim_create_autocmd("FileType", {

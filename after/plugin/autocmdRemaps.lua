@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.schedule(function ()
 		vim.keymap.set("i", ">", "=>", {buffer = true})
 		vim.keymap.set("i", ">>", ">", {buffer = true})
-		vim.keymap.set("i", "-", "->", {buffer = true})
+		-- vim.keymap.set("i", "-", "->", {buffer = true})
 		vim.keymap.set("i", "--", "-", {buffer = true})
 		vim.keymap.set("n", "<leader>rr", ":RustRun<CR>",{buffer = true})
 		end)
