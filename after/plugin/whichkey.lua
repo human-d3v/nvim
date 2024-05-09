@@ -1,0 +1,7 @@
+-- todo
+-- harpoon
+-- git (fugitive)
+-- undotree
+-- settings
+-- telescope
+-- treesitter
