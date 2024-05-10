@@ -14,7 +14,7 @@ require('mason-lspconfig').setup({
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function (args)
 		local bufnr = args.buf
-		local opts = {buffer = bufnr, remap = false}
+		local opts = {buf = bufnr, remap = false}
 		vim.keymap.set("n","gd",function() vim.lsp.buf.definition() end, opts) --go to definition
 		vim.keymap.set('n','K',function() vim.lsp.buf.hover() end, opts) -- hover
 		vim.keymap.set('n','<leader>vws', function() vim.lsp.buf.workspace_symbol() end, opts) --view workspace
@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set('n','<leader>vca', function() vim.lsp.buf.code_action() end, opts) --view code action
 		vim.keymap.set('n','<leader>vrn', function() vim.lsp.buf.rename() end, opts) --rename variables
 		vim.keymap.set('n','<leader>vrr', function() vim.lsp.buf.references() end, opts)
-		vim.keymap.set('i','<C-h>', function() vim.lsp.buf.signature_help() end, opts)
+		vim.keymap.set('i','<leader>h', function() vim.lsp.buf.signature_help() end, opts)
 	end
 })
 
