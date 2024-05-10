@@ -1,6 +1,4 @@
 -- todo
--- telescope
--- treesitter
 -- lang {'rust', 'python','typescript','r'}
 
 local harpoon = {
@@ -8,8 +6,7 @@ local harpoon = {
 	{key = 'Ctrl + e', mode = 'normal', action = 'Open UI list'}, 
 	{key = 'Ctrl + h', mode = 'normal', action = 'Open first UI list item'}, 
 	{key = 'Ctrl + t', mode = 'normal', action = 'Open second UI list item'}, 
-	{key = 'Ctrl + n', mode = 'normal', action = 'Open third UI list item'}, 
-	{key = 'Ctrl + s', mode = 'normal', action = 'Open fourth UI list item'}, 
+	{key = 'Ctrl + n', mode = 'normal', action = 'Open third UI list item'}, {key = 'Ctrl + s', mode = 'normal', action = 'Open fourth UI list item'}, 
 	{key = 'Ctrl + Shift + P', mode = 'normal' ,action = 'Open previous UI list item'},
 	{key = 'Ctrl + Shift + N', mode = 'normal' ,action = 'Open previous UI list item'},
 }
@@ -49,6 +46,26 @@ local telescope = {
 	{key = 'Ctrl + p', mode = 'normal', action = 'Search git files'},
 }
 
+lang = {
+	rust = {
+		{key = '<leader> + rr', mode = 'normal', action = 'Rust run'},
+		{key = '<leader> + ca', mode = 'normal', action = 'Rust code action'}
+	},
+	python = {
+		{key = '<leader><leader> + py', mode = 'normal', action = 'Open Python REPL'},
+		{key = '\\ + d', mode = 'normal', action = 'Send current line to REPL'},
+		{key = '\\ + d', mode = 'visual', action = 'Send current line to REPL'},
+		{key = '\\ + aa', mode = 'visual', action = 'Send current file up to and including current line to REPL'},
+	},
+	r = {
+		{key = '\\ + rf', mode = 'normal', action = 'Open R Terminal in new split'},
+		{key = '\\ + ro', mode = 'normal', action = 'Open R .GlobalEnv in new split'},
+		{key = '\\ + rm', mode = 'normal', action = 'Clear memory in .GlobalEnv and Terminal'},
+		{key = '\\ + rq', mode = 'normal', action = 'Quit R .GlobalEnv and R Terminal'},
+		{key = '\\ + d', mode = 'normal', action = 'Send current line to R Terminal'},
+		{key = '\\ + aa', mode = 'normal', action = 'Source current file in R Terminal'},
+	},
+}
 
 local main = {
 	harpoon = harpoon,
