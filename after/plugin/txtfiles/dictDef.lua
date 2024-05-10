@@ -1,17 +1,11 @@
-function VisualSelection()
-  local s_start = vim.fn.getpos("'<")
-  local s_end = vim.fn.getpos("'>")
-	local wd = vim.api.nvim_buf_get_text(0, s_start[2]-1, s_start[3]-1, s_end[2]-1, s_end[3], {})[1]
-return wd
-end
-
 local function makeCall(opt, wd)
 	local cmd = '~/.config/nvim/after/plugin/txtfiles/dict-api --'..opt..' "'..wd..'"'
 	local handle = io.popen(cmd)
-	if handle == nil then 
-		return error("error in makeCall")
-	end
 	local result = handle:read("*a")
+	if result == nil or handle == nil then
+		print("error in call")
+		return 
+	end
 	handle:close()
 	return result --returns a string '{word = <wd>, definition = <definition>}'
 end
