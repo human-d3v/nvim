@@ -58,19 +58,19 @@ local plugins = {
     config = function()
     	require("codeium").setup({})
   end},
-	-- 	{
-	-- 	  "jackMort/ChatGPT.nvim",
-	-- 	    event = "VeryLazy",
-	-- 	    config = function()
-	-- 	      require("chatgpt").setup()
-	-- 	    end,
-	-- 	    dependencies = {
-	-- 	      "MunifTanjim/nui.nvim",
-	-- 	      "nvim-lua/plenary.nvim",
-	-- 	      "folke/trouble.nvim",
-	-- 	      "nvim-telescope/telescope.nvim"
-	-- 	    }
-	-- 	},
+		{
+		  "jackMort/ChatGPT.nvim",
+		    event = "VeryLazy",
+		    config = function()
+		      require("chatgpt").setup()
+		    end,
+		    dependencies = {
+		      "MunifTanjim/nui.nvim",
+		      "nvim-lua/plenary.nvim",
+		      "folke/trouble.nvim",
+		      "nvim-telescope/telescope.nvim"
+		    }
+		},
 	{
 		"NvChad/nvim-colorizer.lua",
 		config = function()

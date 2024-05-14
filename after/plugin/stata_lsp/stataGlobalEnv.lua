@@ -48,7 +48,7 @@ end
 function StataGlobalEnv()
 	-- vim.api.nvim_command('lua SendToRepl
 	-- initialize describe grab
-	captureDescribedVariables()
+	CaptureDescribedVariables()
 	-- get contents of s register
 	local contents = vim.api.nvim_get_register("s")
 	-- create a new empty buffer
