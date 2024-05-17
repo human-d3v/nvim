@@ -1,9 +1,9 @@
 function OpenBufferTerminalRepl(opt)
 	-- vim.api.nvim_exec('new | term', false)
-	vim.api.nvim_exec('belowright split | term', false)
+	vim.api.nvim_exec2('belowright split | term', {output = true})
 	local bufnr = vim.api.nvim_get_current_buf()
 	vim.g.terminal_buffer = bufnr
-  vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(bufnr, 'channel'), opt .. "\r")
+  vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel', {buf = bufnr}), opt .. "\r")
 end
 
 
@@ -52,11 +52,11 @@ function SendToRepl(opt)
 		return
 	end
 	if string.match(string.lower(txt), "%f[%a]use%f[%A]") then 
-		vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(term_buf, 'channel'), txt .. '\r')
-		vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(term_buf, 'channel'), "describe" .. '\r')
+		vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel',{buf = term_buf}), txt .. '\r')
+		vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel',{buf = term_buf}), "describe" .. '\r')
 		-- vim.api.nvim_command("lua StataGlobalEnv()")
 	else
-		vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(term_buf, 'channel'), txt .. '\r')
+		vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel', {buf = term_buf}), txt .. '\r')
 	end
 end
 
@@ -71,4 +71,3 @@ vim.api.nvim_create_autocmd("FileType", {
 		end)
 	end,
 })
-
