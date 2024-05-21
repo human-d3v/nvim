@@ -32,10 +32,12 @@ local plugins = {
 	{'williamboman/mason.nvim'},
 	{'williamboman/mason-lspconfig.nvim'},
 	--for R programming
-	'jalvesaq/Nvim-R',
-	'gaalcaras/ncm-R',
+	-- 'jalvesaq/Nvim-R',
+	-- 'gaalcaras/ncm-R',
+	{"R-nvim/R.nvim", lazy = true, ft = {'r','rmd','rnoweb'}},
+	{"R-nvim/cmp-r", lazy = true, ft = {'r','rmd','rnoweb'}},
 	--for Rust
-	{'mrcjkb/rustaceanvim',version = '^4',ft = {'rust'},},
+	{'mrcjkb/rustaceanvim',lazy = true, version = '^4',ft = {'rust'},},
 	--rust debugging
 	{'mfussenegger/nvim-dap'},
 	--for quick commenting
@@ -77,6 +79,7 @@ local plugins = {
 			require("colorizer").setup()
 		end
 	},
+	{'jiangmiao/auto-pairs'},
 }
 
 
