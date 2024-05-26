@@ -80,6 +80,7 @@ local plugins = {
 		end
 	},
 	{'jiangmiao/auto-pairs'},
+	{'sharkdp/fd'},
 }
 
 
