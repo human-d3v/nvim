@@ -5,3 +5,15 @@ vim.keymap.set('n', '<leader>ps', function ()
 	builtin.grep_string({search = vim.fn.input(":Grep > ") })
 end)
 
+
+local telescope = require('telescope')
+
+telescope.setup({
+	defaults = {},
+	pickers = {},
+	extensions = {
+		extension_name = {
+			fd = true,
+		}
+	}
+})
