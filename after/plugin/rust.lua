@@ -38,3 +38,4 @@ vim.g.rustaceanvim ={
 		},
 	},
 }
+
