@@ -43,7 +43,7 @@ local plugins = {
 	--for quick commenting
 	{'numToStr/Comment.nvim',opts = {},lazy = false},
 	--kitty conf files syntax highlighting
-	'fladson/vim-kitty',
+	{'fladson/vim-kitty', ft = {'kitty'}, lazy = true},
 	--markdown preview
 	{"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
