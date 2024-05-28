@@ -80,7 +80,13 @@ local plugins = {
 		end
 	},
 	{'jiangmiao/auto-pairs'},
-	{'sharkdp/fd'},
+	{'Saecki/crates.nvim', event = {'BufRead Cargo.toml'}, 
+		opts = {
+			completion = {
+				cmp = {enable = true},
+			},
+		}
+	},
 }
 
 

@@ -23,7 +23,8 @@ cmp.setup({
 		{name = 'luasnip'},
 		{name = 'codeium'},
 	},{
-		{name = 'buffer'}
+		{name = 'buffer'},
+		{name = 'crates'},
 	})
 })
 
