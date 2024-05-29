@@ -21,7 +21,10 @@ if not configs.stata then
 end
 
 lspconfig.stata.setup {
-	capabilities = vim.lsp.protocol.make_client_capabilities(),
+	capabilities = {
+		vim.lsp.protocol.make_client_capabilities(),
+		require('cmp_nvim_lsp').default_capabilities()
+	},
 	on_attach = custom_attach
 }
 

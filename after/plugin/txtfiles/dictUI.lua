@@ -7,10 +7,11 @@ local function renderTitleSeparater(num)
 end
 
 local function newLineRender(obj)
-	local definitions = obj.definition
+	local definitions = obj.definitions
 	local lines = {}
 	for _, def in ipairs(definitions) do
-		table.insert(lines, def)
+		local new_string_def = "-"..def
+		table.insert(lines, new_string_def)
 	end
 	return lines
 end
@@ -21,8 +22,8 @@ function CreateFloatingWindow(wdObj,hdr)
 	local winWidth = vim.api.nvim_win_get_width(0)
 	local winHeight = vim.api.nvim_win_get_height(0)
 	--calculate floating window size
-	local floatWidth = math.ceil(winWidth * 0.2)
-	local floatHeight = math.ceil(winWidth * 0.02)
+	local floatWidth = math.ceil(winWidth * 0.4)
+	local floatHeight = math.ceil(winWidth * 0.20)
 	--calculate starting pos
 	local col = math.ceil((winWidth-floatWidth)/2)
 	local row = math.ceil((winHeight-floatHeight)/2)

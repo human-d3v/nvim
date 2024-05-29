@@ -1,6 +1,7 @@
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query","typescript", "javascript","python","r"},
+  ensure_installed = { "c", "lua", "vim", "vimdoc", "query","typescript",
+											"javascript","python","r","rnoweb"},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -18,4 +19,13 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+	-- incremental_seleciton = {
+	-- 	enable = true,
+	-- 	keymaps = {
+	-- 		init_selection = "<C-space>",
+	-- 		node_incremental = "<C-space>",
+	-- 		scope_incremental = false,
+	-- 		node_decremental = "<bs>",
+	-- 	}
+	-- }
 }

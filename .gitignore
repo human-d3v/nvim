@@ -1,6 +1,2 @@
 lazy-lock.json
-after/plugin/txtfiles/syn/bin/
-after/plugin/txtfiles/syn/include/
-after/plugin/txtfiles/syn/lib/
-after/plugin/txtfiles/syn/__pycache__/
-
+after/plugin/txtfiles/dict-api

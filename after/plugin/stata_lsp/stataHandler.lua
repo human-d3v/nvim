@@ -1,10 +1,24 @@
 function OpenBufferTerminalRepl(opt)
 	-- vim.api.nvim_exec('new | term', false)
-	vim.api.nvim_exec('belowright split | term', false)
+	vim.api.nvim_exec2('belowright split | term', {output = true})
 	local bufnr = vim.api.nvim_get_current_buf()
-  vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(bufnr, 'channel'), opt .. "\r")
+	vim.g.terminal_buffer = bufnr
+  vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel', {buf = bufnr}), opt .. "\r")
 end
 
+
+local function next_line()
+	local current_line = vim.api.nvim_win_get_cursor(0)[1]
+	local total_lines = vim.api.nvim_buf_line_count(0)
+
+	for i = current_line+1, total_lines do
+		local line_content = vim.api.nvim_buf_get_lines(0, i-1, i, false)[1]
+		if line_content:match('^%S') then
+			vim.api.nvim_win_set_cursor(0, {i,0})
+			break
+		end
+	end
+end
 
 function SendToRepl(opt)
 	--0: send the current line to Stata
@@ -23,18 +37,8 @@ function SendToRepl(opt)
 		txt = vim.api.nvim_get_current_line()
 	end
 
-	--move cursor to next non-empty line
-	-- local empty_line_pattern = '^%s*$'
-	local empty_or_comment_line = "'^\\s*\\*|^\\s*$'"
-	local cur_line = vim.api.nvim_get_current_line()
-	vim.cmd('normal! j') --move down one line before check
-	while true do
-		if empty_or_comment_line:match(cur_line) then
-			vim.cmd('normal! j')
-		else
-			break
-		end
-	end
+	-- move cursor to next non-whitespace, non-comment line
+	next_line()	
 
 	local term_buf = nil
 	for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
@@ -47,8 +51,13 @@ function SendToRepl(opt)
 		print("No terminal found.")
 		return
 	end
-
-	vim.api.nvim_chan_send(vim.api.nvim_buf_get_option(term_buf, 'channel'), txt .. '\r')
+	if string.match(string.lower(txt), "%f[%a]use%f[%A]") then 
+		vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel',{buf = term_buf}), txt .. '\r')
+		vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel',{buf = term_buf}), "describe" .. '\r')
+		-- vim.api.nvim_command("lua StataGlobalEnv()")
+	else
+		vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel', {buf = term_buf}), txt .. '\r')
+	end
 end
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -62,4 +71,3 @@ vim.api.nvim_create_autocmd("FileType", {
 		end)
 	end,
 })
-

@@ -1,24 +1,30 @@
-function VisualSelection()
-  local s_start = vim.fn.getpos("'<")
-  local s_end = vim.fn.getpos("'>")
-	local wd = vim.api.nvim_buf_get_text(0, s_start[2]-1, s_start[3]-1, s_end[2]-1, s_end[3], {})[1]
-return wd
-end
-
-local function makeCall(wd)
-	local cmd = 'source ~/.config/nvim/after/plugin/txtfiles/syn/bin/activate && python3 ~/.config/nvim/after/plugin/txtfiles/syn/dict-def.py ' .. wd
+local function makeCall(opt, wd)
+	local cmd = '~/.config/nvim/after/plugin/txtfiles/dict-api --'..opt..' "'..wd..'"'
 	local handle = io.popen(cmd)
 	local result = handle:read("*a")
+	if result == nil or handle == nil then
+		print("error in call")
+		return 
+	end
 	handle:close()
 	return result --returns a string '{word = <wd>, definition = <definition>}'
 end
 
-function GetDef()
-	local wd = VisualSelection()
-	-- print(makeCall(wd))
-	local wdObjStr = makeCall(wd) --returns string
+function GetDefOrSyn(opt)
+	if opt ~= 'def' and opt ~= 'syn' then
+		return error("opt must be 'def' or 'syn', you passed "..opt)	
+	end
+	local title = (opt == 'def') and 'Dictionary:' or 'Thesaurus:'
+	vim.cmd('normal! gv"xy')
+	local wd = vim.fn.getreg('x')
+	wd = string.gsub(wd, '\n',"") --strip whitespace
+	local wdObjStr = makeCall(opt, wd) --returns string
 	local tblFunc = load("return " .. wdObjStr)
+	if tblFunc == nil then
+		print("error in building table")
+		return
+	end
 	local wdObj = tblFunc()
-	CreateFloatingWindow(wdObj, 'Dictionary:')
+	CreateFloatingWindow(wdObj, title)
 end
 
