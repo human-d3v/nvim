@@ -28,6 +28,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end
 })
 
+local dap = require('dap')
+dap.adapters.gdb = {
+	type = "executable",
+	command = "gdb",
+	args = {"-i","dap"}
+}
 
 --specific for lsp support for neovim configuration
 --shoutout to @VonHeikemen
