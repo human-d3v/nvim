@@ -79,7 +79,6 @@ local plugins = {
 			require("colorizer").setup()
 		end
 	},
-	{'jiangmiao/auto-pairs'},
 	{'Saecki/crates.nvim', event = {'BufRead Cargo.toml'}, 
 		opts = {
 			completion = {
