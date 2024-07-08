@@ -28,10 +28,11 @@ local function next_line()
 	end
 end
 
-function SendToRepl(opt)
-	--0: send the current line to Stata
-	--1: send the visual selection to Stata
-	--2: send the entire file up to and including the current line to Stata
+function SendToRepl(opt, ...)
+	--0: send the current line to REPL	
+	--1: send the visual selection to REPL
+	--2: send the entire file up to and including the current line to REPL
+	--3: send text passed as optional args to REPL
 	local txt = ''
 	if opt == 1 then
 		vim.cmd('normal! gv"xy') --captures vis selection
@@ -41,6 +42,12 @@ function SendToRepl(opt)
 		local lnTxts = vim.api.nvim_buf_get_lines(vim.api.nvim_get_current_buf(), 0, ln, false)
 		txt = table.concat(lnTxts, "\n")
 		-- txt = lnTxts
+	elseif opt == 3 then
+		if ... then
+			for i, v in ipairs({...}) do
+				txt = txt .. v
+			end
+		end
 	else
 		txt = vim.api.nvim_get_current_line()
 	end
