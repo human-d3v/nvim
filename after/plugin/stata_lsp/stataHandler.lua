@@ -2,7 +2,15 @@ function OpenBufferTerminalRepl(opt)
 	-- vim.api.nvim_exec('new | term', false)
 	vim.api.nvim_exec2('belowright split | term', {output = true})
 	local bufnr = vim.api.nvim_get_current_buf()
-	vim.g.terminal_buffer = bufnr
+	if opt == 'stata-mp' then
+		vim.g.stata_repl = bufnr
+	elseif opt == 'py' then
+		vim.g.python_repl = bufnr
+	else 
+		vim.term_buf = bufnr
+	end
+	-- vim.g.term_buf = bufnr
+	-- vim.api.nvim_buf_set_var(bufnr, 'buffer_name', bufname)
   vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel', {buf = bufnr}), opt .. "\r")
 end
 
@@ -41,12 +49,21 @@ function SendToRepl(opt)
 	next_line()	
 
 	local term_buf = nil
-	for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-		if vim.bo[bufnr].buftype == 'terminal' then
-			term_buf = bufnr
-			break
+	if vim.g.stata_repl ~= nil then
+		term_buf = vim.g.stata_repl
+	elseif vim.g.python_repl ~= nil then
+		term_buf = vim.g.python_repl
+	elseif vim.g.term_buf ~= nil then
+		term_buf = vim.g.term_buf
+	else
+		for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+			if vim.bo[bufnr].buftype == 'terminal' then
+				term_buf = bufnr
+				break
+			end
 		end
 	end
+
 	if term_buf == nil then
 		print("No terminal found.")
 		return
