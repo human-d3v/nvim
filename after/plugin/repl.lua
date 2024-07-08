@@ -83,3 +83,12 @@ function SendToRepl(opt, ...)
 		vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel', {buf = term_buf}), txt .. '\r')
 	end
 end
+
+function VerifySendToRepl(repl_type, cmd)
+	local answer = vim.fn.input('Are you sure you want to send "' .. cmd .. '"to the REPL? [y,n]  ')
+	if answer:lower() == 'y' then 
+		SendToRepl(repl_type, cmd)
+	else
+		print('Cancelled')
+	end
+end
