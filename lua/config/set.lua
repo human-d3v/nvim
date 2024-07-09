@@ -45,4 +45,5 @@ vim.cmd [[
 	autocmd BufRead,BufNewFile *.do set filetype=stata
 	autocmd BufRead,BufNewFile *.ado set filetype=stata
 	autocmd BufRead,BufNewFile *.dct set filetype=stata
+	autocmd BufRead,BufNewFile *.ipynb set filetype=python
 ]]
