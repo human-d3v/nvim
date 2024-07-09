@@ -62,18 +62,21 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "python",
 	callback = function()
 		vim.schedule(function()
-			vim.keymap.set("n", "<leader>sql", [[:lua OpenBufferTerminalRepl('py')<CR>]] , {noremap = true, buffer = true})
+			vim.keymap.set("n", "<leader><leader>py", [[:lua OpenBufferTerminalRepl('py')<CR>]] , {noremap = true, buffer = true})
 			vim.keymap.set({"v","x"}, "<Bslash>d", [[:lua SendToRepl(1)<CR>]], {noremap=true, buffer=true})
 			vim.keymap.set("n", "<Bslash>d", [[:lua SendToRepl(0)<CR>]], {noremap=true, buffer=true})
 			vim.keymap.set("n", "<Bslash>aa", [[:lua SendToRepl(2)<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set('n', '<Bslash>n', [[:lua SendToRepl(3, "py")<CR>]], {noremap=true, buffer=true})
+			vim.keymap.set('n', '<Bslash>c', [[:lua VerifySendToRepl(3, "exit()")<CR>]], {noremap=true, buffer=true})
 		end)
 	end,
 })
 ```
 This is was originally designed to work as a SQL REPL when working with python
 files. But It works by capturing either visual selections or the current line
-and sending them to a python REPL which is opened using the `<leader>sql` key
+and sending them to a python REPL which is opened using the `<leader><leader>py` key
 mapping.
+
 ______
 ### Rust
 For some quicker keymaps, I used the following commands:
@@ -130,17 +133,18 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = {"r", "rnoweb","rmd"},
 	callback = function ()
 		vim.schedule(function ()
+			vim.keymap.set('t','<leader>mv', ":lua ResizeAndMove(80)<CR>", {buffer = true})
 			vim.keymap.set("i", ">", " %>% ", {buffer = true})
 			vim.keymap.set("i", ">>", ">", {buffer = true})
-			vim.keymap.set("i", "in ", "%in%", {buffer = true})
-			vim.keymap.set("i", "`", "```{r}\n\n```", {buffer = true})
-			vim.keymap.set("i", "``", "`", {buffer = true})
+			vim.keymap.set("i", "<C-->", "<Plug>RAssign", {buffer = true, silent = true}) -- reassign keymap for assignment
+			require('cmp').setup({sources = {{ name = "cmp_r" }}})
+			require('cmp_r').setup({})
 		end)
-	end,
+	end
 })
 ```
-This remaps the '>' operator to the ' %>% ' dplyr operator and 'in ' to the
-'%in%' operator. It also adds \``` to R Markdown files.
+This remaps the `>` operator to the ` %>% ` dplyr operator and 'in ' to the
+'%in%' operator. It also assigns `ctrl + _` to the assignment operator.
 
 _____
 ### JavaScript and TypeScript
