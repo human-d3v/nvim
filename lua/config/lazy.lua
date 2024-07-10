@@ -86,6 +86,8 @@ local plugins = {
 			},
 		}
 	},
+	{"vhyrro/luarocks.nvim", priority = 1001, opts = { rocks = {"magick"}}}, -- not necessary for neovim 11+
+	{"3rd/image.nvim", dependencies = {"luarocks.nvim"}, config = function() end},
 }
 
 
