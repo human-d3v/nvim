@@ -1,17 +1,20 @@
 function OpenBufferTerminalRepl(opt)
-	-- vim.api.nvim_exec('new | term', false)
+	--set global variable for code buffer
+	vim.g.code_buf = vim.api.nvim_get_current_buf()
+	--open term buf and move cursor there
 	vim.api.nvim_exec2('belowright split | term', {output = true})
 	local bufnr = vim.api.nvim_get_current_buf()
+	-- set global variable based on repl type	
 	if opt == 'stata-mp' then
 		vim.g.stata_repl = bufnr
 	elseif opt == 'py' then
 		vim.g.python_repl = bufnr
-	else 
-		vim.term_buf = bufnr
+	else
+		vim.g.term_buf = bufnr
 	end
-	-- vim.g.term_buf = bufnr
-	-- vim.api.nvim_buf_set_var(bufnr, 'buffer_name', bufname)
   vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel', {buf = bufnr}), opt .. "\r")
+	-- move cursor to code buffer
+	vim.cmd('wincmd p')
 end
 
 
@@ -28,21 +31,28 @@ local function next_line()
 	end
 end
 
-function SendToRepl(opt, ...)
+function SendToRepl(repl_type, input_type, ...)
+	-- repl_type
+	-- 'stata'
+	-- 'python'
+	-- 'term'
+
+	-- input_type
 	--0: send the current line to REPL	
 	--1: send the visual selection to REPL
 	--2: send the entire file up to and including the current line to REPL
 	--3: send text passed as optional args to REPL
+
 	local txt = ''
-	if opt == 1 then
+	if input_type == 1 then
 		vim.cmd('normal! gv"xy') --captures vis selection
 		txt = vim.fn.getreg('x')
-	elseif opt == 2 then
+	elseif input_type == 2 then
 		local ln, _  = unpack(vim.api.nvim_win_get_cursor(0))
 		local lnTxts = vim.api.nvim_buf_get_lines(vim.api.nvim_get_current_buf(), 0, ln, false)
 		txt = table.concat(lnTxts, "\n")
 		-- txt = lnTxts
-	elseif opt == 3 then
+	elseif input_type == 3 then
 		if ... then
 			for i, v in ipairs({...}) do
 				txt = txt .. v
@@ -56,12 +66,19 @@ function SendToRepl(opt, ...)
 	next_line()	
 
 	local term_buf = nil
-	if vim.g.stata_repl ~= nil then
-		term_buf = vim.g.stata_repl
-	elseif vim.g.python_repl ~= nil then
-		term_buf = vim.g.python_repl
-	elseif vim.g.term_buf ~= nil then
-		term_buf = vim.g.term_buf
+
+	if repl_type == 'stata' then
+		if vim.g.stata_repl ~= nil then
+			term_buf = vim.g.stata_repl
+		end
+	elseif repl_type == 'python' then
+		if vim.g.python_repl ~= nil then
+			term_buf = vim.g.python_repl
+		end
+	elseif repl_type == 'term' then
+		if vim.g.term_buf ~= nil then
+			term_buf = vim.g.term_buf
+		end
 	else
 		for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
 			if vim.bo[bufnr].buftype == 'terminal' then
@@ -72,23 +89,78 @@ function SendToRepl(opt, ...)
 	end
 
 	if term_buf == nil then
-		print("No terminal found.")
+		local answer = vim.fn.input("No terminal found. Would you like to open one? \n'p' -- python\n's' -- stata\n't' -- terminal\n'n' -- cancel\n")
+		local possible_opts = {'p', 's', 't'}
+		for i=1, #possible_opts do
+			if answer:lower() == possible_opts[i] then
+				OpenBufferTerminalRepl(answer)
+			end
+			break
+		end
 		return
 	end
-	if string.match(string.lower(txt), "%f[%a]use%f[%A]") then 
-		vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel',{buf = term_buf}), txt .. '\r')
-		vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel',{buf = term_buf}), "describe" .. '\r')
-		-- vim.api.nvim_command("lua StataGlobalEnv()")
-	else
-		vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel', {buf = term_buf}), txt .. '\r')
-	end
+
+	vim.api.nvim_chan_send(vim.api.nvim_get_option_value('channel', {buf = term_buf}), txt .. '\r')
 end
 
-function VerifySendToRepl(repl_type, cmd)
+
+function VerifySendToRepl(repl_type, input_type, cmd)
 	local answer = vim.fn.input('Are you sure you want to send "' .. cmd .. '"to the REPL? [y,n]  ')
 	if answer:lower() == 'y' then 
-		SendToRepl(repl_type, cmd)
+		SendToRepl(repl_type, input_type, cmd)
 	else
 		print('Cancelled')
 	end
+end
+
+function TempBuffer()
+	if vim.g.term_buf == nil then
+		print('No terminal found')
+	end
+	--get current buffer
+	local bufnr = vim.api.nvim_create_buf(false,true)
+	local winWidth = vim.api.nvim_win_get_width(0)
+	local winHeight = vim.api.nvim_win_get_height(0)
+	--calculate floating window size
+	local floatWidth = math.ceil(winWidth * 0.1)
+	local floatHeight = math.ceil(winWidth * 0.02)
+	--calculate starting pos
+	local win = vim.api.nvim_get_current_win()
+	local cursor = vim.api.nvim_win_get_cursor(win)
+	local col = cursor[2] + 1
+	local row = cursor[1] + 1
+	--set opts
+	local opts = {
+		relative='editor',
+		width= floatWidth,
+		height= 2, -- floatHeight,
+		col=col,
+		row=row,
+		style='minimal',
+		border= {
+		  {"╭", "FloatBorder"},
+      {"─", "FloatBorder"},
+      {"╮", "FloatBorder"},
+      {"│", "FloatBorder"},
+      {"╯", "FloatBorder"},
+      {"─", "FloatBorder"},
+      {"╰", "FloatBorder"},
+      {"│", "FloatBorder"}
+		},
+	}
+	vim.cmd("highlight FloatBorder guifg=white")
+-- 	--create the floating window
+	local floating_win = vim.api.nvim_open_win(bufnr, true, opts)
+	vim.api.nvim_command('startinsert')
+
+	local function execute_cmd()
+		local cmd = vim.api.nvim_get_current_line()
+		SendToRepl('term', 3, cmd)
+		vim.api.nvim_win_close(floating_win, true)
+	end
+
+	_G.execute_cmd = execute_cmd
+
+	vim.api.nvim_buf_set_keymap(bufnr, 'i', '<CR>','<C-o>:lua execute_cmd()<CR>', 
+	{noremap=true, silent=true})
 end
