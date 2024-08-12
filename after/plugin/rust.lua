@@ -39,14 +39,6 @@ vim.g.rustaceanvim ={
 	},
 }
 
-vim.api.nvim_create_autocmd("LspAttach", {
-	pattern = {"rust"},
-	callback = function ()
-		vim.schedule_wrap(
-			vim.keymap.set("n","<leader>ch",vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled()), {buffer = true})
-		)
-	end
-})
 local dap = require('dap')
 
 dap.configurations.rust = {
