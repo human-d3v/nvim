@@ -39,7 +39,6 @@ local plugins = {
 	--rust debugging
 	{'mfussenegger/nvim-dap'},
 	--for quick commenting
-	-- {'numToStr/Comment.nvim',opts = {},lazy = false},
 	--kitty conf files syntax highlighting
 	{'fladson/vim-kitty', ft = {'kitty'}, lazy = true},
 	--markdown preview
@@ -50,25 +49,25 @@ local plugins = {
 	},
 	--Stata syntax highlighting
 	'poliquin/stata-vim',
-	-- --ai auto completion with codeium
-	-- {"Exafunction/codeium.nvim",
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"hrsh7th/nvim-cmp"},
-	--    config = function()
-	--    	require("codeium").setup({})
-	--  end},
-	  {
-      "zbirenbaum/copilot.lua",
-      cmd = "Copilot",
-      event = "InsertEnter",
-		},
-	  {
-      "zbirenbaum/copilot-cmp",
-      config = function()
-          require("copilot_cmp").setup()
-      end,
-		},
+	--ai auto completion with codeium
+	{"Exafunction/codeium.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp"},
+	   config = function()
+	   	require("codeium").setup({})
+	 end},
+		--  {
+		--     "zbirenbaum/copilot.lua",
+		--     cmd = "Copilot",
+		--     event = "InsertEnter",
+		-- },
+		--  {
+		--     "zbirenbaum/copilot-cmp",
+		--     config = function()
+		--         require("copilot_cmp").setup()
+		--     end,
+		-- },
 		{
 		  "jackMort/ChatGPT.nvim",
 		    event = "VeryLazy",

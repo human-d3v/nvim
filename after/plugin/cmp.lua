@@ -21,8 +21,8 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{name = 'nvim_lsp'},
 		{name = 'luasnip'},
-		{name = 'copilot'},
-		-- {name = 'codeium'},
+		-- {name = 'copilot'},
+		{name = 'codeium'},
 	},{
 		{name = 'buffer'},
 		{name = 'crates'},
