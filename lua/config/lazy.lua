@@ -39,7 +39,6 @@ local plugins = {
 	--rust debugging
 	{'mfussenegger/nvim-dap'},
 	--for quick commenting
-	-- {'numToStr/Comment.nvim',opts = {},lazy = false},
 	--kitty conf files syntax highlighting
 	{'fladson/vim-kitty', ft = {'kitty'}, lazy = true},
 	--markdown preview
@@ -75,7 +74,9 @@ local plugins = {
 		"NvChad/nvim-colorizer.lua",
 		config = function()
 			require("colorizer").setup()
-		end
+		end,
+		ft = {'css', 'html', 'markdown'},
+		lazy = true,
 	},
 	{'Saecki/crates.nvim', event = {'BufRead Cargo.toml'}, 
 		opts = {
