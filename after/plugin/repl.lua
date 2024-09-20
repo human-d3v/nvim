@@ -10,7 +10,7 @@ function OpenBufferTerminalRepl(opt)
 	-- set global variable based on repl type	
 	if opt == 'stata-mp' then
 		vim.g.stata_repl = bufnr
-	elseif opt == 'py' then
+	elseif opt:sub(-3):match("^%s*(.-)%s*$") == 'py' then
 		vim.g.python_repl = bufnr
 	else
 		vim.g.term_buf = bufnr
