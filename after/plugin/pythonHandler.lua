@@ -1,6 +1,6 @@
 local opts = {noremap = true, buffer = true, silent = true}
 
-local activate_str = '[ -f "./bin/activate" ] && source ./bin/activate || [ -f "../bin/activate" ] && source ../bin/activate || [ -f "../../bin/activate" ] && source ../../bin/activate && py' 
+local activate_str = [[ [ -f "./bin/activate" ] && source ./bin/activate || [ -f "../bin/activate" ] && source ../bin/activate || [ -f "../../bin/activate" ] && source ../../bin/activate; py ]]
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "python",
 	callback = function()
