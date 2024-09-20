@@ -62,7 +62,7 @@ end
 ---lazy load these functions bound to filetypes
 
 vim.api.nvim_create_autocmd('Filetype', {
-	pattern = {'python', 'stata'},
+	pattern = {'python', 'stata', 'javascript'},
 	callback = function()
 		vim.schedule(function()
 			local function next_line()
@@ -173,12 +173,13 @@ vim.api.nvim_create_autocmd('Filetype', {
 			function TempBuffer()
 				if vim.g.term_buf == nil then
 					print('No terminal found')
+					return
 				end
 				--get new buffer
 				local bufnr = vim.api.nvim_create_buf(false,true)
 				local winWidth = vim.api.nvim_win_get_width(0)
 				-- local winHeight = vim.api.nvim_win_get_height(0)
-				vim.api.nvim_set_option_value('filetype', 'bash', {buf=bufnr})
+				-- vim.api.nvim_set_option_value('filetype', 'bash', {buf=bufnr})
 
 
 				--calculate floating window size
@@ -212,18 +213,35 @@ vim.api.nvim_create_autocmd('Filetype', {
 				--create the floating window
 				local floating_win = vim.api.nvim_open_win(bufnr, true, opts)
 				vim.api.nvim_command('startinsert')
+				vim.api.nvim_win_set_buf(floating_win, vim.g.term_buf)
 
-				local function execute_cmd()
-					local cmd = vim.api.nvim_get_current_line()
-					SendToRepl('term', 3, cmd)
+				local function close_buf()
 					vim.api.nvim_command('stopinsert')
 					vim.api.nvim_win_close(floating_win, true)
 				end
+				
+				_G.close_buf = close_buf
 
-				_G.execute_cmd = execute_cmd
+				vim.api.nvim_buf_set_keymap(vim.g.term_buf, 't', '<CR>',
+					[[<CR><C-\><C-n>:lua vim.api.nvim_command('stopinsert')<CR>]],
+					{noremap=true, silent=true})
 
-				vim.api.nvim_buf_set_keymap(bufnr, 'i', '<CR>','<C-o>:lua execute_cmd()<CR>', 
-				{noremap=true, silent=true})
+				vim.api.nvim_buf_set_keymap(vim.g.term_buf, 'n', '<C-c>',
+					[[<C-\><C-n>:q!<CR>]],
+					{noremap=true, silent=true})
+
+
+				-- local function execute_cmd()
+				-- 	local cmd = vim.api.nvim_get_current_line()
+				-- 	SendToRepl('term', 3, cmd)
+				-- 	vim.api.nvim_command('stopinsert')
+				-- 	vim.api.nvim_win_close(floating_win, true)
+				-- end
+				--
+				-- _G.execute_cmd = execute_cmd
+				--
+				-- vim.api.nvim_buf_set_keymap(bufnr, 'i', '<CR>','<C-o>:lua execute_cmd()<CR>', 
+				-- 	{noremap=true, silent=true})
 			end
 		end)
 	end,
