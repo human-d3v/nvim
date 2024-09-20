@@ -1,11 +1,12 @@
-local opts = {noremap = true, buffer = true}
+local opts = {noremap = true, buffer = true, silent = true}
 
+local activate_str = [[ [ -f "./bin/activate" ] && source ./bin/activate || [ -f "../bin/activate" ] && source ../bin/activate || [ -f "../../bin/activate" ] && source ../../bin/activate; py ]]
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "python",
 	callback = function()
 		vim.schedule(function()
 			--python repl
-			vim.keymap.set("n", "<leader><leader>py", [[:lua OpenBufferTerminalRepl('py')<CR>]] , opts)
+			vim.keymap.set("n", "<leader><leader>py", ":lua OpenBufferTerminalRepl('".. activate_str .. "')<CR>" , opts)
 			vim.keymap.set({"v","x"}, "<Bslash>d", [[:lua SendToRepl('python', 1)<CR>]], opts)
 			vim.keymap.set("n", "<Bslash>d", [[:lua SendToRepl('python', 0)<CR>]], opts)
 			vim.keymap.set("n", "<Bslash>aa", [[:lua SendToRepl('python', 2)<CR>]], opts)
