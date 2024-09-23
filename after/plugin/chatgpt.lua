@@ -20,29 +20,29 @@ local instructions = [[
 ]]
 
 -- to use work's azure depoloyement
-local config = {
-	api_host_cmd = 'echo -n ""',
-	api_key_cmd = 'echo $OPENAI_API_KEY',
-	api_type_cmd = 'echo azure',
-	azure_api_base_cmd = 'echo $OPENAI_API_BASE',
-	azure_api_engine_cmd = 'echo recognition-assistant', -- engine means deployement name (wtf?)
-	azure_api_version_cmd = 'echo 2024-02-15-preview',
-	chat = {
-		welcome_message = instructions,
-	}
-}
+-- local config = {
+-- 	api_host_cmd = 'echo -n ""',
+-- 	api_key_cmd = 'echo $OPENAI_API_KEY',
+-- 	api_type_cmd = 'echo azure',
+-- 	azure_api_base_cmd = 'echo $OPENAI_API_BASE',
+-- 	azure_api_engine_cmd = 'echo recognition-assistant', -- engine means deployement name (wtf?)
+-- 	azure_api_version_cmd = 'echo 2024-02-15-preview',
+-- 	chat = {
+-- 		welcome_message = instructions,
+-- 	}
+-- }
 
 
 
-require("chatgpt").setup(config)
+-- require("chatgpt").setup(config)
 
--- to use chatgpt credits
--- require('chatgpt').setup({
--- 	 api_key_cmd = getPersonalKey,
--- 	 chat = {
--- 		welcome_message = instructions, 
--- 	 }
--- })
+--to use chatgpt credits
+require('chatgpt').setup({
+	 api_key_cmd = 'echo $OPENAI_API_KEY',
+	 chat = {
+		welcome_message = instructions, 
+	 }
+})
 
 
 vim.api.nvim_create_autocmd('BufEnter', {
