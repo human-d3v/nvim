@@ -8,6 +8,9 @@ end
 
 local function newLineRender(obj)
 	local definitions = obj.definitions
+	if definitions == nil then 
+		definitions = obj.synonyms
+	end
 	local lines = {}
 	for _, def in ipairs(definitions) do
 		local new_string_def = "-"..def

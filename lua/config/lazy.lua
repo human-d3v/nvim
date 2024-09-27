@@ -54,9 +54,20 @@ local plugins = {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"hrsh7th/nvim-cmp"},
-    config = function()
-    	require("codeium").setup({})
-  end},
+	   config = function()
+	   	require("codeium").setup({})
+	 end},
+		--  {
+		--     "zbirenbaum/copilot.lua",
+		--     cmd = "Copilot",
+		--     event = "InsertEnter",
+		-- },
+		--  {
+		--     "zbirenbaum/copilot-cmp",
+		--     config = function()
+		--         require("copilot_cmp").setup()
+		--     end,
+		-- },
 		{
 		  "jackMort/ChatGPT.nvim",
 		    event = "VeryLazy",
@@ -85,6 +96,8 @@ local plugins = {
 			},
 		}
 	},
+	{"vhyrro/luarocks.nvim", priority = 1001, opts = { rocks = {"magick"}}}, -- not necessary for neovim 11+
+	{"3rd/image.nvim", dependencies = {"luarocks.nvim"}, config = function() end},
 }
 
 

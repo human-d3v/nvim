@@ -7,6 +7,7 @@ vim.api.nvim_create_autocmd('FileType', {
 						vim.api.nvim_buf_set_keymap(0, "v", "<leader>syn", [[:lua GetDefOrSyn('syn')<CR>]], {noremap=true, silent=true})
 						vim.keymap.set("n", "<leader>br", [[:lua LineBreak()<CR>]], {noremap=true, silent=true})
             vim.opt_local.spell = true
+						vim.api.nvim_buf_set_keymap(0, "v","<leader>wc", [[:lua WordCount()<CR>]], {noremap=true, silent=true})
         end)
     end
 })
