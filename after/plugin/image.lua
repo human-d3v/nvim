@@ -1,33 +1,34 @@
-require('image').setup({
-	backend = "kitty",
-	integrations = {
-		markdown = {
-			enabled = true, 
-			clear_in_insert_mode = false,
-			download_remote_images=true,
-			only_render_image_at_cursor = false,
-			filetypes = {"markdown", "vimwiki"}
-		},
-		neorg = {
-			enabled = true,
-			clear_in_insert_mode = false,
-			download_remote_images=false,
-			filetypes = {"norg"},
-		}, 
-		html = {
-			enabled = false,
-		},
-		css = {
-			enabled = false,
-		}
-	},
-	max_width = 100,
-	max_height = 12,
-	max_width_window_percentage = math.huge,
-	max_height_window_percentage = math.huge,
-	window_overlap_clear_enabled = true, --toggles images when windows are overlapped
-	window_overlap_clear_ft_ignore = {"cmp_menu", "cmp_docs", ""},
-	editor_only_render_when_focused = false, -- auto show/hide images when editor gains/loses focus
-	tmux_show_only_in_active_window = false, -- auto show/hide images only in active tmux window (needs visual activity off)
-	hijack_file_patterns = {"*.png","*.jpg","*.jpeg","*.gif","*.webp","*.avif"}, -- render image files as images when opened
-})
+-- require('image').setup({
+-- 	backend = "kitty",
+-- 	integrations = {
+-- 		markdown = {
+-- 			enabled = true, 
+-- 			clear_in_insert_mode = false,
+-- 			download_remote_images=true,
+-- 			only_render_image_at_cursor = false,
+-- 			filetypes = {"markdown", "vimwiki"}
+-- 		},
+-- 		neorg = {
+-- 			enabled = true,
+-- 			clear_in_insert_mode = false,
+-- 			download_remote_images=false,
+-- 			filetypes = {"norg"},
+-- 		}, 
+-- 		html = {
+-- 			enabled = false,
+-- 		},
+-- 		css = {
+-- 			enabled = false,
+-- 		}
+-- 	},
+-- 	max_width = 100,
+-- 	max_height = 12,
+-- 	max_width_window_percentage = math.huge,
+-- 	max_height_window_percentage = math.huge,
+-- 	window_overlap_clear_enabled = true, --toggles images when windows are overlapped
+-- 	window_overlap_clear_ft_ignore = {"cmp_menu", "cmp_docs", ""},
+-- 	editor_only_render_when_focused = false, -- auto show/hide images when editor gains/loses focus
+-- 	tmux_show_only_in_active_window = false, -- auto show/hide images only in active tmux window (needs visual activity off)
+-- 	hijack_file_patterns = {"*.png","*.jpg","*.jpeg","*.gif","*.webp","*.avif"}, -- render image files as images when opened
+-- })
+
