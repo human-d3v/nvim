@@ -10,7 +10,6 @@ require('mason-lspconfig').setup({
 	},
 })
 
-
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function (args)
 		local bufnr = args.buf
@@ -26,7 +25,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set('n','<leader>vrr', function() vim.lsp.buf.references() end, opts)
 		vim.keymap.set('n','<leader>h', function() vim.lsp.buf.signature_help() end, opts)
 		vim.keymap.set('n', '<leader>ch', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, opts)
+		vim.keymap.set('n', '<C-y>', function() vim.diagnostic.open_float() end, opts)
 	end
+})
+
+-- remove comment line on newline
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback= function()
+		vim.opt.formatoptions:remove {"c", "r", "o"}
+	end,
+	group=general, 
+	desc = "Disable new line comment"
 })
 
 local dap = require('dap')
