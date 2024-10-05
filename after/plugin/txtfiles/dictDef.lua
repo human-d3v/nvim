@@ -1,5 +1,5 @@
 local function makeCall(opt, wd)
-	local cmd = '~/.config/nvim/after/plugin/txtfiles/dict-api --'..opt..' "'..wd..'"'
+	local cmd = '~/.local/bin/dictionary/dict-api --'..opt..' "'..wd..'"'
 	local handle = io.popen(cmd)
 	if handle == nil then
 		return error("error in making call")
