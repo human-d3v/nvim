@@ -26,6 +26,8 @@ cmp.setup({
 	},{
 		{name = 'buffer'},
 		{name = 'crates'},
+	},{
+		{name = 'nvim_lsp_signature_help'},
 	})
 })
 
