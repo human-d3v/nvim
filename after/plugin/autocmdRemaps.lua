@@ -21,3 +21,11 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = {"py", "python"},
+	callback = function ()
+		vim.schedule(function ()
+			vim.keymap.set("i", "<C-->", "->", {buffer = true})
+		end)
+	end,
+})
