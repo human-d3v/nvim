@@ -98,6 +98,21 @@ local plugins = {
 	},
 	--{"vhyrro/luarocks.nvim", priority = 1001, opts = { rocks = {"magick"}}}, -- not necessary for neovim 11+
 	--{"3rd/image.nvim", dependencies = {"luarocks.nvim"}, config = function() end},
+	{
+		'human-d3v/stata-nvim', branch = 'packaging', ft = {'stata'},
+		build = 'git pull origin packaging && cd lsp-server && npm init -y && npm install && bun build ./server/src/server.ts --compile --outfile server_bin && cd ..',
+		opts = {},
+		config = function ()
+			require("stata-nvim")
+		end,
+		event = 'VeryLazy',
+	}
+	-- {dir = "~/Documents/plugins/stata-nvim",
+	-- 	config = function ()
+	-- 		require("stata-nvim")
+	-- 	end,
+	-- 	event = 'VeryLazy',
+	-- }
 }
 
 

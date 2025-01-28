@@ -223,7 +223,7 @@ vim.api.nvim_create_autocmd('Filetype', {
 				_G.close_buf = close_buf
 
 				vim.api.nvim_buf_set_keymap(vim.g.term_buf, 't', '<CR>',
-					[[<CR><C-\><C-n>:lua vim.api.nvim_command('stopinsert')<CR>]],
+					[[<CR><C-\><C-n><Esc>]],
 					{noremap=true, silent=true})
 
 				vim.api.nvim_buf_set_keymap(vim.g.term_buf, 'n', '<C-c>',
