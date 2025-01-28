@@ -100,7 +100,7 @@ local plugins = {
 	--{"3rd/image.nvim", dependencies = {"luarocks.nvim"}, config = function() end},
 	{
 		'human-d3v/stata-nvim', branch = 'main', ft = {'stata'},
-		build = 'git pull origin packaging && cd lsp-server && npm init -y && npm install && bun build ./server/src/server.ts --compile --outfile server_bin && cd ..',
+		build = 'cd lsp-server && npm init -y && npm install && bun build ./server/src/server.ts --compile --outfile server_bin && cd ..',
 		opts = {},
 		config = function ()
 			require("stata-nvim")
