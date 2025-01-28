@@ -54,4 +54,12 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", {silent = true})
 
 --for terminal navigation (the noremap opt is important, otherwise it fails)
 vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader><leader>term", ':lua OpenBufferTerminalRepl("")<CR>', {noremap = true, silent=true})
+vim.keymap.set("n", "<leader><leader>term", function() 
+		vim.g.code_buf = vim.api.nvim_get_current_buf()
+		vim.api.nvim_exec2('belowright split | term', {output = true})
+		local bufnr = vim.api.nvim_get_current_buf()
+		vim.g.term_buf = bufnr
+		vim.api.nvim_win_set_cursor(0, {vim.api.nvim_buf_line_count(bufnr), 0})
+		vim.cmd('wincmd p')
+	end, {noremap = true, silent=true}
+)
