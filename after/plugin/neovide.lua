@@ -1,5 +1,5 @@
 if vim.g.neovide then 
-	vim.g.neovide_transparency = 0.8
+	vim.g.neovide_transparency = 0.6
 	vim.g.neovide_refresh_rate = 60
 	local system = vim.loop.os_uname().sysname
 	if system == 'Darwin' then 
