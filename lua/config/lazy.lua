@@ -89,7 +89,7 @@ local plugins = {
 		ft = {'css', 'html', 'markdown'},
 		lazy = true,
 	},
-	{'Saecki/crates.nvim', event = {'BufRead Cargo.toml'}, 
+	{'Saecki/crates.nvim', event = {'BufRead Cargo.toml'},
 		opts = {
 			completion = {
 				cmp = {enable = true},
@@ -108,7 +108,16 @@ local plugins = {
 		event = 'VeryLazy',
 		dependencies = {"human-d3v/term-repl.nvim"}
 	},
-	{'human-d3v/term-repl.nvim', ft = {'javascript', 'stata', 'python'}, opts = {}}
+	{'human-d3v/term-repl.nvim', ft = {'javascript', 'stata', 'python'}, opts = {}},
+	{
+		"human-d3v/txt-files.nvim",
+		build = "cd api-caller && bun install && bun run compile",
+		opts = {}
+	},
+	{
+		"kevinhwang91/nvim-ufo",
+		dependencies = "kevinhwang91/promise-async"
+	}
 }
 
 
