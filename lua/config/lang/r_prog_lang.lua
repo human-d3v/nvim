@@ -1,0 +1,22 @@
+return {
+	{
+	{"R-nvim/R.nvim", lazy = true, ft = {'r','rmd','rnoweb'},
+		dependencies =
+			{"R-nvim/cmp-r", lazy = true, ft = {'r','rmd','rnoweb'}},
+		config = function ()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = {"r", "rnoweb","rmd"},
+				callback = function ()
+					vim.schedule(function ()
+						vim.keymap.set('t','<leader>mv', ":lua ResizeAndMove(80)<CR>", {buffer = true})
+						vim.keymap.set("i", "<C-.>", " %>% ", {buffer = true})
+						vim.keymap.set("i", "<C-->", "<Plug>RInsertAssign", {buffer = true, silent = true}) -- reassign keymap for assignment
+						require('cmp').setup({sources = {{ name = "cmp_r" }}})
+						require('cmp_r').setup({})
+					end)
+				end
+			})
+		end
+	}
+	}
+}
