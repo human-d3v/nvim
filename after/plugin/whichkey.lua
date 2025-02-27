@@ -46,7 +46,7 @@ local telescope = {
 	{key = 'Ctrl + p', mode = 'normal', action = 'Search git files'},
 }
 
-lang = {
+local lang = {
 	rust = {
 		{key = '<leader> + rr', mode = 'normal', action = 'Rust run'},
 		{key = '<leader> + ca', mode = 'normal', action = 'Rust code action'}

@@ -9,17 +9,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
---for the rusty-boi
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = {"rust", "rs", "Rust"},
-	callback = function ()
-		vim.schedule(function ()
-		vim.keymap.set("i", "<C-.>", "=>", {buffer = true})
-		vim.keymap.set("n", "<leader>rr", ":RustRun<CR>",{buffer = true})		
-		vim.keymap.set('i', '<C-->', '->', {buffer = true})
-		end)
-	end,
-})
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = {"py", "python"},
