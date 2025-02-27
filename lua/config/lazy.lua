@@ -25,10 +25,13 @@ local plugins = {
 	{"Tsuzat/NeoSolarized.nvim", lazy = false, priority = 1000, config = {}},
 	--lsp configuration
 	{"neovim/nvim-lspconfig"},
-	{"hrsh7th/cmp-nvim-lsp"},
 	{"hrsh7th/nvim-cmp"},
+	{"hrsh7th/cmp-nvim-lsp"},
+	{"hrsh7th/cmp-nvim-lsp-signature-help"},
+	{"hrsh7th/cmp-path"},
+	{"hrsh7th/cmp-buffer"},
 	{"L3MON4D3/LuaSnip", version  = 'v2.*', build = "make install_jsregexp",
-		dependencies = {'saadparwaiz1/cmp_luasnip', 'rafamadriz/friendly-snippets'}},
+		dependencies = {'saadparwaiz1/cmp_luasnip'}},
 	{'williamboman/mason.nvim'},
 	{'williamboman/mason-lspconfig.nvim'},
 	--for R programming
