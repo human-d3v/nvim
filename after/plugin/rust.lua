@@ -4,8 +4,8 @@ vim.g.rustaceanvim ={
 	server = {
 		on_attach = function(_, bufnr)
 			--code actions
-			vim.keymap.set('n','<leader>ca', function(_, bufnr) 
-				vim.cmd.RustLsp('codeAction') end, 
+			vim.keymap.set('n','<leader>ca', function(_, bufnr)
+				vim.cmd.RustLsp('codeAction') end,
 				{buffer = bufnr, desc = 'Code Action'})
 			--code debuggables
 			vim.keymap.set('n', '<leader>dr', function(_, bufnr)

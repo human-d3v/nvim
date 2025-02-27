@@ -6,7 +6,7 @@ require('mason-lspconfig').setup({
 			require('lspconfig')[server_name].setup({
 				capabilities = capabilities,
 			})
-		end	
+		end
 	},
 })
 
@@ -18,8 +18,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set('n','K',function() vim.lsp.buf.hover() end, opts) -- hover
 		vim.keymap.set('n','<leader>vws', function() vim.lsp.buf.workspace_symbol() end, opts) --view workspace
 		vim.keymap.set('n','<leader>vd', function() vim.diagnostic.open_float() end, opts) --view diagnostic
-		vim.keymap.set('n','[d',function() vim.diagnostic.goto_next() end, opts)
-		vim.keymap.set('n',']d',function() vim.diagnostic.goto_prev() end, opts)
+		vim.keymap.set('n','[d',function() vim.diagnostic.get_next() end, opts)
+		vim.keymap.set('n',']d',function() vim.diagnostic.get_prev() end, opts)
 		vim.keymap.set('n','<leader>vca', function() vim.lsp.buf.code_action() end, opts) --view code action
 		vim.keymap.set('n','<leader>vrn', function() vim.lsp.buf.rename() end, opts) --rename variables
 		vim.keymap.set('n','<leader>vrr', function() vim.lsp.buf.references() end, opts)
@@ -29,12 +29,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end
 })
 
+
 -- remove comment line on newline
+local id = vim.api.nvim_create_augroup('GeneralLsp', {clear = true})
+
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback= function()
 		vim.opt.formatoptions:remove {"c", "r", "o"}
 	end,
-	group=general, 
+	group=id,
 	desc = "Disable new line comment"
 })
 
@@ -66,7 +69,7 @@ require('lspconfig').lua_ls.setup({
 				},
 				workspace = {
 					checkThirdParty = false,
-					
+
 					library = {
 					--make server aware of nvim runtime files
 						vim.fn.expand('$VIMRUNTIME/lua'),

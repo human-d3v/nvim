@@ -40,7 +40,7 @@ local instructions = [[
 require('chatgpt').setup({
 	 api_key_cmd = 'echo $OPENAI_API_KEY',
 	 chat = {
-		welcome_message = instructions, 
+		welcome_message = instructions,
 	 }
 })
 

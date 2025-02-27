@@ -6,9 +6,9 @@ lspconfig.ts_ls.setup({
 			includeInlayParameterNameHints = 'all',
 			includeInlayParameterNameHintsWhenArgumentMatchesName = true,
 			includeInlayFunctionParameterTypeHints = true,
-			includeInlayVariableTypeHints = true, 
-			includeInlayPropertyDeclarationTypeHints = true, 
-			includeInlayFunctionLikeReturnTypeHints = true, 
+			includeInlayVariableTypeHints = true,
+			includeInlayPropertyDeclarationTypeHints = true,
+			includeInlayFunctionLikeReturnTypeHints = true,
 			includeInlayEnumMemberValueHints = true,
 			importModuleSpecifierPreference = 'non-relative',
 		}

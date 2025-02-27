@@ -26,7 +26,7 @@ NeoSolarized.setup({
 	end,
 })
 
-function bgOpacity(color)
+local function bg_opacity(color)
 	-- color = color or "PaperColor"
 	color = color or "NeoSolarized"
 	vim.cmd.colorscheme(color)
@@ -37,4 +37,4 @@ end
 
 
 
-bgOpacity()
+bg_opacity()
