@@ -17,7 +17,7 @@ local plugins = {
 	{'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
   {'nvim-telescope/telescope.nvim', tag = '0.1.6',--nvim telescope. works as a fuzzy finder 
     dependencies = { 'nvim-lua/plenary.nvim' }},
-	{'ThePrimeagen/harpoon', branch = 'harpoon2', 
+	{'ThePrimeagen/harpoon', branch = 'harpoon2',
 		dependencies = {'nvim-lua/plenary.nvim'}},
 	{'mbbill/undotree'},
 	{'tpope/vim-fugitive'}, --allows you to navigate a git repo and track changes
@@ -59,7 +59,7 @@ local plugins = {
 			"nvim-lua/plenary.nvim",
 			"hrsh7th/nvim-cmp"},
 	   config = function()
-	   	require("codeium").setup({})
+			require("codeium").setup({})
 	 end},
 		--  {
 		--     "zbirenbaum/copilot.lua",
