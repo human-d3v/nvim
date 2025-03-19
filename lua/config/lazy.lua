@@ -22,7 +22,8 @@ local plugins = {
 	{'mbbill/undotree'},
 	{'tpope/vim-fugitive'}, --allows you to navigate a git repo and track changes
 	{"folke/trouble.nvim", dependencies={"nvim-tree/nvim-web-devicons"},opts = {}},
-	{"Tsuzat/NeoSolarized.nvim", lazy = false, priority = 1000, config = {}},
+	-- {"Tsuzat/NeoSolarized.nvim", lazy = false, priority = 1000, config = {}},
+	{"Shatur/neovim-ayu"},
 	--lsp configuration
 	{"neovim/nvim-lspconfig"},
 	{"hrsh7th/nvim-cmp"},
@@ -102,17 +103,18 @@ local plugins = {
 	},
 	-- {"vhyrro/luarocks.nvim", priority = 1001, opts = { rocks = {"magick"}}}, -- not necessary for neovim 11+
 	-- {"3rd/image.nvim", dependencies = {"luarocks.nvim"}, config = function() end},
-	{
-		'human-d3v/stata-nvim', branch = 'main', ft = {'stata'},
-		build = 'git pull && cd lsp-server && npm init -y && npm install && bun build ./server/src/server.ts --compile --outfile server_bin && cd ..',
-		opts = {},
-		config = function ()
-			require("stata-nvim")
-		end,
-		event = 'VeryLazy',
-		dependencies = {"human-d3v/term-repl.nvim"}
-	},
-	{'human-d3v/term-repl.nvim', ft = {'javascript', 'stata', 'python'}, opts = {}},
+	-- {
+	-- 	'human-d3v/stata-nvim', branch = 'main', ft = {'stata'},
+	-- 	build = 'git pull && cd lsp-server && npm init -y && npm install && bun build ./server/src/server.ts --compile --outfile server_bin && cd ..',
+	-- 	opts = {},
+	-- 	config = function ()
+	-- 		require("stata-nvim")
+	-- 	end,
+	-- 	event = 'VeryLazy',
+	-- 	dependencies = {"human-d3v/term-repl.nvim"}
+	-- },
+	-- {'human-d3v/term-repl.nvim', ft = {'javascript', 'stata', 'python'}, opts = {}},
+	{dir = "~/Documents/plugins/term-repl.nvim", "term-repl.nvim", opts = {}},
 	{
 		"human-d3v/txt-files.nvim",
 		build = "cd api-caller && bun install && bun run compile",
