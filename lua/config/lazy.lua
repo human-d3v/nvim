@@ -113,8 +113,8 @@ local plugins = {
 	-- 	event = 'VeryLazy',
 	-- 	dependencies = {"human-d3v/term-repl.nvim"}
 	-- },
-	-- {'human-d3v/term-repl.nvim', ft = {'javascript', 'stata', 'python'}, opts = {}},
-	{dir = "~/Documents/plugins/term-repl.nvim", "term-repl.nvim", opts = {}},
+	{'human-d3v/term-repl.nvim', ft = {'javascript', 'stata', 'python'}, opts = {}},
+	-- {dir = "~/Documents/plugins/term-repl.nvim", "term-repl.nvim", opts = {}},
 	{
 		"human-d3v/txt-files.nvim",
 		build = "cd api-caller && bun install && bun run compile",
