@@ -94,10 +94,19 @@ local plugins = {
 		ft = {'css', 'html', 'markdown'},
 		lazy = true,
 	},
-	{'Saecki/crates.nvim', event = {'BufRead Cargo.toml'},
+	{'Saecki/crates.nvim', 
+		event = {'BufRead Cargo.toml'},
 		opts = {
 			completion = {
-				cmp = {enable = true},
+				crates = {
+					enable = true
+				},
+			},
+			lsp = {
+				enabled = true, 
+				actions = true, 
+				completions = true, 
+				hover = true,
 			},
 		}
 	},
