@@ -98,14 +98,13 @@ local plugins = {
 		event = {'BufRead Cargo.toml'},
 		opts = {
 			completion = {
-				crates = {
-					enable = true
-				},
+				cmp = {enabled = true }, 
+				crates = { enabled = true},
 			},
 			lsp = {
 				enabled = true, 
 				actions = true, 
-				completions = true, 
+				completion = true, 
 				hover = true,
 			},
 		}
