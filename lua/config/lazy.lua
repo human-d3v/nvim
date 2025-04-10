@@ -129,8 +129,15 @@ local plugins = {
 		opts = {}
 	},
 	{
-		"kevinhwang91/nvim-ufo",
-		dependencies = "kevinhwang91/promise-async"
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    ---@module "ibl"
+    ---@type ibl.config
+    opts = {},
+	},
+	{
+	  "sphamba/smear-cursor.nvim",
+	  opts = {},
 	}
 }
 
