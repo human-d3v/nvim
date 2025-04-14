@@ -41,6 +41,10 @@ require('ayu').setup({
 			bg = '#eee8d5',
       fg = '#839496'
 		},
+		Search = { -- defaults too dark on transparent terminal
+			bg = '#eee8d5',
+      fg = '#839496'
+		},
 		LineNr = { fg = '#839496' }, -- line number col too dark
 	}
 })
