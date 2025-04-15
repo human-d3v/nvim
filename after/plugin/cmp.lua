@@ -29,7 +29,7 @@ cmp.setup({
 		{name = 'path'},
 		{name = 'luasnip'},
 		-- {name = 'copilot'},
-		{name = 'codeium'},
+		-- {name = 'codeium'},
 		{name = 'buffer'},
 		{name = 'crates'},
 		{name = 'nvim_lsp_signature_help'},
