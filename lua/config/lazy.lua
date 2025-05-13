@@ -54,38 +54,15 @@ local plugins = {
 	},
 	--Stata syntax highlighting
 	{'poliquin/stata-vim', ft = {'stata'}},
-	--ai auto completion with codeium
-	-- {"Exafunction/codeium.nvim",
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"hrsh7th/nvim-cmp"},
-	--    config = function()
-	-- 		require("codeium").setup({})
-	--  end},
-		--  {
-		--     "zbirenbaum/copilot.lua",
-		--     cmd = "Copilot",
-		--     event = "InsertEnter",
-		-- },
-		--  {
-		--     "zbirenbaum/copilot-cmp",
-		--     config = function()
-		--         require("copilot_cmp").setup()
-		--     end,
-		-- },
-		{
-		  "jackMort/ChatGPT.nvim",
-		    event = "VeryLazy",
-		    config = function()
-		      require("chatgpt").setup()
-		    end,
-		    dependencies = {
-		      "MunifTanjim/nui.nvim",
-		      "nvim-lua/plenary.nvim",
-		      "folke/trouble.nvim",
-		      "nvim-telescope/telescope.nvim"
-		    }
-		},
+	--ai integration
+	{
+		"olimorris/codecompanion.nvim",
+		opts = {},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		}
+	},
 	{
 		"NvChad/nvim-colorizer.lua",
 		config = function()
