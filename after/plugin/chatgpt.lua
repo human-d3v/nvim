@@ -60,23 +60,29 @@
 -- this dynamically assigns the model to the buffer if it's available on the computer
 local function available_model_picker(preferred_models)
 	return function (self)
-		if self == nil then 
+		if self == nil then
 			-- Debug:render() calls Adapter.schema.model.default() but doesn't pass in 
 			--- `self`. Just return an empty string
 			return ''
 		end
 
-	local choices = self.schema.model.choices(self)
+		local choices = self.schema.model.choices(self)
 
-	for _, best in ipairs(preferred_models) do 
-		for _, choice in ipairs(choices) do
-			if choice:find(best, 1, true) then 
-				return choice
+		for _, best in ipairs(preferred_models) do
+			for choice, _ in ipairs(choices) do
+				if choice:find(best, 1, true) then
+					return choice
+				end
 			end
 		end
-	end
 
-		return choices[1]
+		-- fallback to first available model
+		for choice, _ in pairs(choices) do
+			return choice
+		end
+
+		-- nothing found
+		return ''
 	end
 end
 
@@ -102,7 +108,7 @@ require("codecompanion").setup({
 					}
 				}
 			})
-			
+
 		end
 	}
 })
