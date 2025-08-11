@@ -26,33 +26,43 @@
 -- 	end,
 -- })
 
-require('ayu').setup({
-	-- mirage = true,
-	terminal = true, 
-	overrides = {
-		Normal = { bg = "none" },
-		NormalFloat = { bg = "none" },
-		-- Folded = { bg = "none" },
-		FoldColumn = { bg = "none" },
-		CursorLine = { bg = "none" },
-		VertSplit = { bg = "none" },
-		SignColumn = { bg = "none" },
-		Visual = { -- defaults too dark on transparent terminal
-			bg = '#eee8d5',
-      fg = '#839496'
-		},
-		Search = { -- defaults too dark on transparent terminal
-			bg = '#eee8d5',
-      fg = '#839496'
-		},
-		LineNr = { fg = '#839496' }, -- line number col too dark
-	}
+-- require('ayu').setup({
+-- 	-- mirage = true,
+-- 	terminal = true,
+-- 	overrides = {
+-- 		Normal = { bg = "none" },
+-- 		NormalFloat = { bg = "none" },
+-- 		-- Folded = { bg = "none" },
+-- 		FoldColumn = { bg = "none" },
+-- 		CursorLine = { bg = "none" },
+-- 		VertSplit = { bg = "none" },
+-- 		SignColumn = { bg = "none" },
+-- 		Visual = { -- defaults too dark on transparent terminal
+-- 			bg = '#eee8d5',
+--       fg = '#839496'
+-- 		},
+-- 		Search = { -- defaults too dark on transparent terminal
+-- 			bg = '#eee8d5',
+--       fg = '#839496'
+-- 		},
+-- 		LineNr = { fg = '#839496' }, -- line number col too dark
+-- 	}
+-- })
+
+require('midnight').setup({
+	LineNr = { fg = '#839496', bg = BackgroundColor},
+	SignColumn = { bg = BackgroundColor },
+	Visual = { -- defaults too dark on transparent terminal
+		bg = '#eee8d5',
+		fg = '#839496'
+	},
 })
 
 local function bg_opacity(color)
 	-- color = color or "PaperColor"
 	-- color = color or "NeoSolarized"
-	color = color or "ayu"
+	-- color = color or "ayu"
+	color = color or "midnight"
 	vim.cmd.colorscheme(color)
 	vim.opt.background = "dark"
 	vim.api.nvim_set_hl(0, "Normal", {bg = "none"})
