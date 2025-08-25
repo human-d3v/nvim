@@ -125,7 +125,9 @@ local plugins = {
 		config = true, 
 		ft = {"dart"}, 
 		lazy = true,
-	}
+	},
+	-- toggle-term
+	{'akinsho/toggleterm.nvim', version = "*", config = true}
 }
 
 
