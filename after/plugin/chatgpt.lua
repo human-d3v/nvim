@@ -90,6 +90,12 @@ require("codecompanion").setup({
 	strategies = {
 		chat = {
 			adapter = "ollama",
+			keymaps = {
+				close = {
+					modes = { n = "<Bslash>q", i = "<Bslash>q" },
+					opts = {}
+				}
+			}
 		},
 		inline = {
 			adapter = "ollama",
@@ -102,7 +108,8 @@ require("codecompanion").setup({
 					model = {
 						default = available_model_picker(
 							{
-								"codestral:latest"
+								-- "codestral:latest"
+								"deepseek-coder-v2"
 							}
 						)
 					}
@@ -112,3 +119,10 @@ require("codecompanion").setup({
 		end
 	}
 })
+
+vim.schedule(function ()
+	vim.api.nvim_set_keymap("n", "<Bslash>c", ":CodeCompanionChat<CR>", 
+		{silent=true})
+	vim.api.nvim_set_keymap("n", "<Bslash>q", ":CodeCompanion<CR>",
+		{silent=true})
+end)
