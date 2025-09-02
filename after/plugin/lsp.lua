@@ -55,28 +55,39 @@ local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 require('lspconfig').lua_ls.setup({
-		settings = {
-			Lua = {
-				--Disable telemetry
-				telemtry = {enable = false},
-				runtime = {
-					--tell lsp which version of lua you're using 
-					version = 'LuaJIT',
-					path = runtime_path,
-				},
-				diagnostics = {
-					globals = { 'vim'}
-				},
-				workspace = {
-					checkThirdParty = false,
+	settings = {
+		Lua = {
+			--Disable telemetry
+			telemetry = {enable = false},
+			runtime = {
+				--tell lsp which version of lua you're using 
+				version = 'LuaJIT',
+				path = runtime_path,
+			},
+			diagnostics = {
+				globals = { 'vim'}
+			},
+			workspace = {
+				checkThirdParty = false,
 
-					library = {
-					--make server aware of nvim runtime files
-						vim.fn.expand('$VIMRUNTIME/lua'),
-						vim.fn.stdpath('config') .. '/lua'
-					}
+				library = {
+				--make server aware of nvim runtime files
+					vim.fn.expand('$VIMRUNTIME/lua'),
+					vim.fn.stdpath('config') .. '/lua'
 				}
+			}
 		}
 	}
 })
 
+-- mason is launching a separate version of lua_ls on MacOS without the custom 
+--   settings this will kill that server
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function ()
+		for _, client in ipairs(vim.lsp.get_clients()) do
+			if client.name == "lua_ls" and vim.tbl_isempty(client.config.settings or {}) then
+				client.stop()
+			end
+		end
+	end
+})
