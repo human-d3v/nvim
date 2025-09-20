@@ -21,10 +21,10 @@ vim.g.rustaceanvim ={
             enable = true,
           },
         },
-        checkOnSave = {
-          allFeatures = true,
+				check = {
           command = "clippy",
           extraArgs = {"--no-deps"},
+					allFeatures = true,
         },
         procMacro = {
           enable = true,
