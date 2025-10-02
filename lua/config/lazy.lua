@@ -120,7 +120,8 @@ local plugins = {
 	-- for dart development
 	{ 'nvim-flutter/flutter-tools.nvim', dependencies = {
 				'nvim-lua/plenary.nvim',
-				'stevearc/dressing.nvim' --optional for vim.ui.select },
+				'stevearc/dressing.nvim' --optional for vim.ui.select 
+			},
 			config = true, ft = {"dart"}, lazy = true, },
 	-- toggle-term
 	{'akinsho/toggleterm.nvim', version = "*", config = true}
