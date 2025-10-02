@@ -42,11 +42,26 @@ local plugins = {
 	{"R-nvim/cmp-r", lazy = true, ft = {'r','rmd','rnoweb'}},
 	--for Rust
 	{'mrcjkb/rustaceanvim',lazy = true, version = '^5',ft = {'rust'},},
-	--rust debugging
+	---- debugging
 	{'mfussenegger/nvim-dap'},
-	--for quick commenting
+	---- crate lookup
+	{'Saecki/crates.nvim', 
+		event = {'BufRead Cargo.toml'},
+		opts = {
+			completion = {
+				cmp = {enabled = true }, 
+				crates = { enabled = true},
+			},
+			lsp = {
+				enabled = true, 
+				actions = true, 
+				completion = true, 
+				hover = true,
+			},
+		}
+	},
 	--kitty conf files syntax highlighting
-	{'fladson/vim-kitty', ft = {'kitty'}, lazy = true},
+	-- {'fladson/vim-kitty', ft = {'kitty'}, lazy = true},
 	--markdown preview
 	{"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -64,6 +79,10 @@ local plugins = {
 			"nvim-treesitter/nvim-treesitter",
 		}
 	},
+	{"zbirenbaum/copilot.lua", cmd = "Copilot"},
+	{"zbirenbaum/copilot-cmp", dependencies = {"zbirenbaum/copilot.lua"},
+		opts = {}},
+	-- css/markdown/html colorizer
 	{
 		"NvChad/nvim-colorizer.lua",
 		config = function()
@@ -71,21 +90,6 @@ local plugins = {
 		end,
 		ft = {'css', 'html', 'markdown'},
 		lazy = true,
-	},
-	{'Saecki/crates.nvim', 
-		event = {'BufRead Cargo.toml'},
-		opts = {
-			completion = {
-				cmp = {enabled = true }, 
-				crates = { enabled = true},
-			},
-			lsp = {
-				enabled = true, 
-				actions = true, 
-				completion = true, 
-				hover = true,
-			},
-		}
 	},
 	-- {
 	-- 	'human-d3v/stata-nvim', branch = 'main', ft = {'stata'},
@@ -104,9 +108,7 @@ local plugins = {
 		build = "cd api-caller && bun install && bun run compile",
 		opts = {}
 	},
-	{
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl",
     ---@module "ibl"
     ---@type ibl.config
     opts = {},
@@ -116,16 +118,10 @@ local plugins = {
 	  opts = {},
 	},
 	-- for dart development
-	{
-		'nvim-flutter/flutter-tools.nvim',
-		dependencies = {
-			'nvim-lua/plenary.nvim',
-			'stevearc/dressing.nvim' --optional for vim.ui.select
-		},
-		config = true, 
-		ft = {"dart"}, 
-		lazy = true,
-	},
+	{ 'nvim-flutter/flutter-tools.nvim', dependencies = {
+				'nvim-lua/plenary.nvim',
+				'stevearc/dressing.nvim' --optional for vim.ui.select },
+			config = true, ft = {"dart"}, lazy = true, },
 	-- toggle-term
 	{'akinsho/toggleterm.nvim', version = "*", config = true}
 }
