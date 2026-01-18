@@ -14,7 +14,25 @@ vim.g.mapleader = " "
 
 local plugins = {
 	{'nvim-lua/plenary.nvim'},
-	{'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
+	{'nvim-treesitter/nvim-treesitter', 
+		version = false,
+		build = ':TSUpdate', 
+		main = 'nvim-treesitter.configs',
+		branch = 'master', -- explicitly force the stable branch
+		opts = {
+			ensure_installed = "lua", "vim", "vimdoc", "python", "c", "cpp", "csv",
+			auto_intall = true, 
+			highlight = { enable = true }, 
+			indent = { enable  = true }, 
+		},
+		config = function(_, opts)
+			local status_ok, configs = pcall(require, 'nvim-treesitter.configs')
+			if not status_ok then 
+				return 
+			end 
+			configs.setup(opts)
+    end,
+	},
   {'nvim-telescope/telescope.nvim', tag = '0.1.6',--nvim telescope. works as a fuzzy finder 
     dependencies = { 'nvim-lua/plenary.nvim' }},
 	{'ThePrimeagen/harpoon', branch = 'harpoon2',
