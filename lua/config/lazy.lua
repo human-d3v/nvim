@@ -57,7 +57,6 @@ local plugins = {
 	{'williamboman/mason-lspconfig.nvim'},
 	--for R programming
 	{"R-nvim/R.nvim", lazy = true, ft = {'r','rmd','rnoweb'}},
-	{"R-nvim/cmp-r", lazy = true, ft = {'r','rmd','rnoweb'}},
 	--for Rust
 	{'mrcjkb/rustaceanvim',lazy = true, version = '^5',ft = {'rust'},},
 	---- debugging

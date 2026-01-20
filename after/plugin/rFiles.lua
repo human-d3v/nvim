@@ -9,14 +9,14 @@ vim.api.nvim_create_autocmd("FileType", {
 				local line_num = vim.api.nvim_win_get_cursor(0)[1]
 				vim.api.nvim_buf_set_lines(0, line_num, line_num, false, {"# " .. string.rep("~", 77)})
 			end, {buffer = true, silent = true})
-			require('cmp').setup({sources = {
-				{ name = "cmp_r" },
-				{ name = "codeium" }, 
-				{ name = "luasnip" },
-				{ name = "nvim_lsp_signature_help" },
-				{ name = "buffer" },
-			}})
-			require('cmp_r').setup({})
 		end)
 	end
 })
+
+require('cmp').setup({sources = {
+	{ name = "nvim_lsp" },
+	-- { name = "codeium" }, 
+	{ name = "luasnip" },
+	{ name = "nvim_lsp_signature_help" },
+	{ name = "buffer" },
+}})
