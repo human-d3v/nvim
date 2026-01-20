@@ -76,9 +76,15 @@ require("codecompanion").setup({
 	strategies = {
 		chat = {
 			adapter = "copilot",
+			keymaps = {
+				close = {
+					modes = {n = "<Bslash>q", i = "<Bslash>q"},
+					opts = {}
+				}
+			}
 		},
 		inline = {
-			adapter = "copilot", 
+			adapter = "copilot",
 		},
 		agent = {
 			adapter = "copilot",
@@ -88,7 +94,7 @@ require("codecompanion").setup({
 
 -- Set keymaps
 vim.schedule(function ()
-	vim.api.nvim_set_keymap("n", "<Bslash>c", ":CodeCompanionChat<CR>", 
+	vim.api.nvim_set_keymap("n", "<Bslash>c", ":CodeCompanionChat<CR>",
 		{silent=true})
 	vim.api.nvim_set_keymap("n", "<Bslash>q", ":CodeCompanion<CR>",
 		{silent=true})
