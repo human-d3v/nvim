@@ -15,6 +15,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 require('cmp').setup({sources = {
 	{ name = "nvim_lsp" },
+	{ name = "path" },
 	-- { name = "codeium" }, 
 	{ name = "luasnip" },
 	{ name = "nvim_lsp_signature_help" },
