@@ -40,9 +40,9 @@ local plugins = {
 	{'mbbill/undotree'},
 	{'tpope/vim-fugitive'}, --allows you to navigate a git repo and track changes
 	{"folke/trouble.nvim", dependencies={"nvim-tree/nvim-web-devicons"},opts = {}},
-	-- {"Tsuzat/NeoSolarized.nvim", lazy = false, priority = 1000, config = {}},
+	{"Tsuzat/NeoSolarized.nvim", lazy = false, priority = 1000, config = {}},
 	-- {"Shatur/neovim-ayu"},
-	 {"dasupradyumna/midnight.nvim", lazy=false, priority=1000},
+	 -- {"dasupradyumna/midnight.nvim", lazy=false, priority=1000},
 	--lsp configuration
 	{"neovim/nvim-lspconfig"},
 	{"hrsh7th/nvim-cmp"},
