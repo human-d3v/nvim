@@ -1,11 +1,11 @@
 local toggleterm = require('toggleterm')
-local midnight = require("midnight.colors")
+-- local midnight = require("midnight.colors")
 
 toggleterm.setup({
 	shade_terminals = false,
 	highlights = {
 		Normal = {
-			guibg = midnight.components.none
+			-- guibg = midnight.components.none
 		}
 	}
 })
