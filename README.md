@@ -1,5 +1,7 @@
 # NeoVim Config
 #### Dependencies:
+* [tree-sitter-cli](https://crates.io/crates/tree-sitter-cli) - installed via cargo
+* [ripgrep](https://crates.io/crates/ripgrep) - installed via cargo
 * Python 3 - for text file handling. This is used to reach out to dictionary
   and thesaurus api's.
   * Python packages:
@@ -53,7 +55,39 @@ mv ./tmp/*.py ./syn &
 pip install requests sys &
 rm -Rf ./tmp &
 ```
+_______
+## nvim-treesitter Archival
 
+Seems like the community decided to bully the maintainer(s) of nvim-treesitter,
+so it was archived. In an effort to stay productive and out of the drama, the
+solution (for now) is to manually manage tree-sitter parsers. The basic
+workflow is as follows:
+```bash
+# create local 'site' directories
+mkdir -p $HOME/.local/share/nvim/site/parser
+mkdir -p $HOME/.local/share/nvim/site/queries
+
+# clone language specific parser from tree-sitter
+git clone https://github.com/tree-sitter/tree-sitter-bash 
+cd tree-sitter-bash
+
+# generate parser files (this step creates the src/parser.c & src/scanner.c files)
+tree-sitter generate
+
+# compile parser using gcc (or drop-in replacemnt like zig or cc) and save to nvim path
+gcc -shared -o $HOME/.local/share/nvim/site/parser/bash.so \
+    -fPIC src/scanner.c src/parser.c
+
+# borrow queries from nvim-treesitter archive
+mkdir $HOME/.local/share/nvim/site/queries/bash
+git clone https://github.com/nvim-treesitter/nvim-treesitter
+cp -r nvim-treesitter/runtime/queries/bash/*.scm $HOME/.local/share/nvim/site/queries/bash/
+```
+
+There are some cases where this process won't work. Notable is the
+`tree-sitter-typescript` repo, containing grammar for both `typescript` and
+`tsx`. Luckily, neovim ships with integrated lua parsers, but other parsers
+have to be integrated ad-hoc.
 _______
 ## Language Specific configurations
 ### Python
