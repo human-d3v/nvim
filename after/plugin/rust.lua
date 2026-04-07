@@ -1,3 +1,10 @@
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "rust",
+	callback = function ()
+		pcall(vim.treesitter.start)
+	end
+})
+
 -- add rust completion
 vim.g.rustaceanvim ={
 	tools = {},
